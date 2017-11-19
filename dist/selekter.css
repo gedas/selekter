@@ -1,0 +1,7 @@
+.selekter-lasso {
+  background: #2196f3;
+  border: 1px solid #1565C0;
+  opacity: .3;
+  position: absolute; 
+  z-index: 4002;
+}
