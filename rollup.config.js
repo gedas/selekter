@@ -4,16 +4,16 @@ import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
-import copy from 'rollup-plugin-copy';
+import postcss from 'rollup-plugin-postcss';
 import tsc from 'typescript';
 import pkg from './package.json';
 
 const dev = !!process.env.ROLLUP_WATCH;
 
 let plugins = [
-  copy({ 'src/selekter.css': 'dist/selekter.css' }),
   typescript({ typescript: tsc }),
-  resolve()
+  resolve(),
+  postcss({ extract: 'dist/selekter.css' })
 ];
 
 if (dev) {

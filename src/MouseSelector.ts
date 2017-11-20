@@ -3,12 +3,12 @@ import { Selector, SelectorDisconnector } from './Selector';
 
 const matches = Element.prototype.matches || Element.prototype.msMatchesSelector;
 
-export interface MouseOptions {
+export interface MouseSelectorOptions {
   tick: string;
   closestSelectable(event: MouseEvent, area: Area);
 }
 
-const defaults: MouseOptions = {
+const defaults: MouseSelectorOptions = {
   tick: '.selekter-tick',
   closestSelectable: (event, area) =>
     (event.target as Element).closest(area.options.selectable)
@@ -17,7 +17,7 @@ const defaults: MouseOptions = {
 export class MouseSelector implements Selector {
   private area: Area;
 
-  constructor(private options?: Partial<MouseOptions>) {
+  constructor(private options?: Partial<MouseSelectorOptions>) {
     this.options = { ...defaults, ...options };
   }
 

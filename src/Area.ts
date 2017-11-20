@@ -1,4 +1,4 @@
-import { Selection, SELECTION_EVENT } from './Selection';
+import { Selection, SelectionEvent, SELECTION_EVENT } from './Selection';
 import { Selector, SelectorDisconnector } from './Selector';
 import defaultSelectors from './defaultSelectors';
 
@@ -16,11 +16,14 @@ export interface AreaOptions {
    * A style class to be added to area root element when there are elements selected.
    */
   selectionClass: string;
+
+  selectedClass: string;
 }
 
 const defaults: Partial<AreaOptions> = {
   selectable: '.selekter-selectable',
-  selectionClass: 'selekter-selection'
+  selectionClass: 'selekter-selection',
+  selectedClass: 'selekter-selected'
 }
 
 /**
@@ -33,8 +36,10 @@ export class Area {
   private selectorDisconnectors: SelectorDisconnector[];
   private observer: MutationObserver;
   
-  private onSelection = () =>
+  private onSelection = (event: SelectionEvent) => {
     this.root.classList.toggle(this.options.selectionClass, this.selection.size > 0);
+    (event.target as Element).classList.toggle(this.options.selectedClass, event.detail.selected);
+  }
 
   /**
    * Creates an `Area`.
@@ -107,18 +112,6 @@ export class Area {
     this.selectorDisconnectors.forEach(disconnect => disconnect());
     this.root.removeEventListener(SELECTION_EVENT, this.onSelection);
   }
-
-  // private querySelectables(element: Element, selector: string) {
-  //   let acceptNode = (element: Element) => element.matches(selector)
-  //     ? NodeFilter.FILTER_ACCEPT
-  //     : NodeFilter.FILTER_SKIP;
-
-  //   let selectables = new Set<Element>();
-  //   for (let s, it = document.createNodeIterator(element, NodeFilter.SHOW_ELEMENT, { acceptNode }); s = it.nextNode();) {
-  //     selectables.add(s);
-  //   }
-  //   return selectables;
-  // }
 
   private observeDescendants(root: Element, callback: MutationCallback) {
     let observer = new MutationObserver(callback);

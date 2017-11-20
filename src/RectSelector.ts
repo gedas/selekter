@@ -1,26 +1,29 @@
 import { Area } from './Area';
 import { Selector, SelectorDisconnector } from './Selector';
-import { Bound, RectLike } from './Bound';
+import { Rect, RectLike } from './Rect';
 
-export interface RectangleOptions {
-  class: string;
+import './RectSelector.css';
+
+export interface RectSelectorOptions {
+  lassoClass: string;
   minEdge: number;
   appendTo: Element;
   boundary(element: Element): RectLike;
 }
 
-const defaults: RectangleOptions = {
-  class: 'selekter-lasso',
+const defaults: RectSelectorOptions = {
+  lassoClass: 'selekter-lasso',
   minEdge: 10,
   boundary: element => element.getBoundingClientRect(),
   appendTo: document.body
 }
 
-class Offset {
-  constructor(public left: number, public top: number) {}
+interface Offset {
+  left: number;
+  top: number;
 }
 
-export class RectangleSelector extends Bound implements Selector {
+export class RectSelector extends Rect implements Selector {
   private area: Area;
   private lasso: HTMLElement;
 
@@ -28,7 +31,7 @@ export class RectangleSelector extends Bound implements Selector {
   private pendingRenderID: number;
   private preserveSelection: boolean;
   
-  constructor(private options?: Partial<RectangleOptions>) {
+  constructor(private options?: Partial<RectSelectorOptions>) {
     super();
     this.options = {...defaults, ...options};
   }
@@ -41,7 +44,7 @@ export class RectangleSelector extends Bound implements Selector {
 
   private onMouseDown = (event: MouseEvent) => {
     if (event.button === 0 && (event.target === document.documentElement || event.target === this.area.root)) {
-      this.origin = this.withScroll(new Offset(event.clientX, event.clientY));
+      this.origin = this.getPageCoordinates(event);
       this.preserveSelection = event.ctrlKey || event.metaKey;
       document.addEventListener('mousemove', this.onMouseMove);
       document.addEventListener('mouseup', this.onMouseUp);
@@ -51,18 +54,21 @@ export class RectangleSelector extends Bound implements Selector {
 
   private onMouseMove = (event: MouseEvent) => {
     event.preventDefault();
-    let mouse = this.withScroll(new Offset(event.clientX, event.clientY));
+    let mouse = this.getPageCoordinates(event);
 
     this.top = Math.min(this.origin.top, mouse.top);
     this.left = Math.min(this.origin.left, mouse.left);
     this.width = Math.abs(this.origin.left - mouse.left);
     this.height = Math.abs(this.origin.top - mouse.top);
 
-    if (this.setVisible(this.lasso, !this.edgeShorterThan(this.options.minEdge))) {
+    if (this.edgeLongerThan(this.options.minEdge)) {
       if (!this.lasso) {
         this.lasso = this.options.appendTo.appendChild(this.createLassoElement());
       }
       this.requestRender();
+      this.setVisible(true);
+    } else if (this.lasso) {
+      this.setVisible(false);
     }
     this.update();
   }
@@ -70,7 +76,7 @@ export class RectangleSelector extends Bound implements Selector {
   private onMouseUp = () => {
     this.cancelRender();
     this.update();
-    this.setVisible(this.lasso, false);
+    this.setVisible(false);
 
     this.width = this.height = 0;
 
@@ -81,8 +87,10 @@ export class RectangleSelector extends Bound implements Selector {
   private update = () => {
     let selection = this.area.getSelection();
     this.area.getSelectables().forEach(element => {
-      let bound = this.withScroll(Bound.from(this.options.boundary(element)));
-      selection.toggle(element, this.preserveSelection && selection.has(element) || !this.edgeShorterThan(this.options.minEdge) && this.intersects(bound));
+      selection.toggle(element, this.preserveSelection
+        && selection.has(element)
+        || this.edgeLongerThan(this.options.minEdge)
+        && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(element)))));
     });
   }
 
@@ -108,16 +116,15 @@ export class RectangleSelector extends Bound implements Selector {
     this.pendingRenderID = 0;
   }
 
-  private setVisible(element: HTMLElement, visible: boolean) {
-    element && (element.style.display = visible ? '' : 'none');
-    return visible;
+  private setVisible(visible: boolean) {
+    this.lasso.style.display = visible ? '' : 'none';
   }
 
-  private edgeShorterThan(length: number): boolean {
-    return this.width < length && this.height < length;
+  private edgeLongerThan(length: number) {
+    return this.width >= length || this.height >= length;
   }
 
-  private withScroll<T extends Offset | Bound>(offset: T): T {
+  private translateByScroll<T extends Offset>(offset: T): T {
     let body = document.body;
     let html = document.documentElement;
     offset.left += body.scrollLeft || html.scrollLeft;
@@ -125,9 +132,13 @@ export class RectangleSelector extends Bound implements Selector {
     return offset;
   }
 
+  private getPageCoordinates(event: MouseEvent) {
+    return this.translateByScroll({ left: event.clientX, top: event.clientY }); 
+  }
+
   private createLassoElement() {
     let element = document.createElement('div');
-    element.classList.add(this.options.class);
+    element.classList.add(this.options.lassoClass);
     return element;
   }
 

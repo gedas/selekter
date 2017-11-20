@@ -1,7 +1,7 @@
 export * from './Area';
-export * from './Bound';
+export * from './Rect';
 export * from './MouseSelector';
-export * from './RectangleSelector';
+export * from './RectSelector';
 export * from './Selection';
 export * from './Selector';
 

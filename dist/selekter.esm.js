@@ -22,9 +22,6 @@ class ObservableSet extends Set {
     }
 }
 
-/**
- * The type of selection event.
- */
 const SELECTION_EVENT = 'selection';
 /**
  * Represents a set of selected elements. Selection events will be published for each element being added or removed.
@@ -99,13 +96,13 @@ class MouseSelector {
 /**
  * Represents a mutable rectangular boundary.
  */
-class Bound {
+class Rect {
     /**
-     * Creates a new boundary with specified coordinates and size.
-     * @param left The X coordinate of the left side of the boundary.
-     * @param top The Y coordinate of the top of the boundary.
-     * @param width The width of the boundary.
-     * @param height The height of the boundary.
+     * Creates a new rectangle with specified coordinates and size.
+     * @param left The X coordinate of the left side of the rectangle.
+     * @param top The Y coordinate of the top of the rectangle.
+     * @param width The width of the rectangle.
+     * @param height The height of the rectangle.
      */
     constructor(left = 0, top = 0, width = 0, height = 0) {
         this.left = left;
@@ -114,44 +111,38 @@ class Bound {
         this.height = height;
     }
     /**
-     * Creates a boundary from existing rect-like object.
-     * @param rect Other rect-like object to create boundary from.
-     * @example `Bound.from(element.getBoundingClientRect())`
+     * Creates a rectangle from existing rect-like object.
+     * @param r Other rect-like object to create rectangle from.
+     * @example `Rect.from(element.getBoundingClientRect())`
      */
-    static from(other) {
-        return new Bound(other.left, other.top, other.width, other.height);
+    static from(r) {
+        return new Rect(r.left, r.top, r.width, r.height);
     }
     /**
-     * Determines whether this boundary does intersect other rect-like object.
-     * @param other The specified rect-like object.
+     * Determines whether this rectangle intersects other rect-like object.
+     * @param r The specified rect-like object.
      */
-    intersects(other) {
-        return this.left <= other.left + other.width
-            && other.left <= this.left + this.width
-            && this.top <= other.top + other.height
-            && other.top <= this.top + this.height;
+    intersects(r) {
+        return this.left <= r.left + r.width
+            && r.left <= this.left + this.width
+            && this.top <= r.top + r.height
+            && r.top <= this.top + this.height;
     }
 }
 
 const defaults$2 = {
-    class: 'selekter-lasso',
+    lassoClass: 'selekter-lasso',
     minEdge: 10,
     boundary: element => element.getBoundingClientRect(),
     appendTo: document.body
 };
-class Offset {
-    constructor(left, top) {
-        this.left = left;
-        this.top = top;
-    }
-}
-class RectangleSelector extends Bound {
+class RectSelector extends Rect {
     constructor(options) {
         super();
         this.options = options;
         this.onMouseDown = (event) => {
             if (event.button === 0 && (event.target === document.documentElement || event.target === this.area.root)) {
-                this.origin = this.withScroll(new Offset(event.clientX, event.clientY));
+                this.origin = this.getPageCoordinates(event);
                 this.preserveSelection = event.ctrlKey || event.metaKey;
                 document.addEventListener('mousemove', this.onMouseMove);
                 document.addEventListener('mouseup', this.onMouseUp);
@@ -160,23 +151,27 @@ class RectangleSelector extends Bound {
         };
         this.onMouseMove = (event) => {
             event.preventDefault();
-            let mouse = this.withScroll(new Offset(event.clientX, event.clientY));
+            let mouse = this.getPageCoordinates(event);
             this.top = Math.min(this.origin.top, mouse.top);
             this.left = Math.min(this.origin.left, mouse.left);
             this.width = Math.abs(this.origin.left - mouse.left);
             this.height = Math.abs(this.origin.top - mouse.top);
-            if (this.setVisible(this.lasso, !this.edgeShorterThan(this.options.minEdge))) {
+            if (this.edgeLongerThan(this.options.minEdge)) {
                 if (!this.lasso) {
                     this.lasso = this.options.appendTo.appendChild(this.createLassoElement());
                 }
                 this.requestRender();
+                this.setVisible(true);
+            }
+            else if (this.lasso) {
+                this.setVisible(false);
             }
             this.update();
         };
         this.onMouseUp = () => {
             this.cancelRender();
             this.update();
-            this.setVisible(this.lasso, false);
+            this.setVisible(false);
             this.width = this.height = 0;
             document.removeEventListener('mousemove', this.onMouseMove);
             document.removeEventListener('mouseup', this.onMouseUp);
@@ -184,8 +179,10 @@ class RectangleSelector extends Bound {
         this.update = () => {
             let selection = this.area.getSelection();
             this.area.getSelectables().forEach(element => {
-                let bound = this.withScroll(Bound.from(this.options.boundary(element)));
-                selection.toggle(element, this.preserveSelection && selection.has(element) || !this.edgeShorterThan(this.options.minEdge) && this.intersects(bound));
+                selection.toggle(element, this.preserveSelection
+                    && selection.has(element)
+                    || this.edgeLongerThan(this.options.minEdge)
+                        && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(element)))));
             });
         };
         this.render = () => {
@@ -214,38 +211,38 @@ class RectangleSelector extends Bound {
             this.pendingRenderID = 0;
         }
     }
-    setVisible(element, visible) {
-        element && (element.style.display = visible ? '' : 'none');
-        return visible;
+    setVisible(visible) {
+        this.lasso.style.display = visible ? '' : 'none';
     }
-    edgeShorterThan(length) {
-        return this.width < length && this.height < length;
+    edgeLongerThan(length) {
+        return this.width >= length || this.height >= length;
     }
-    withScroll(offset) {
+    translateByScroll(offset) {
         let body = document.body;
         let html = document.documentElement;
         offset.left += body.scrollLeft || html.scrollLeft;
         offset.top += body.scrollTop || html.scrollTop;
         return offset;
     }
+    getPageCoordinates(event) {
+        return this.translateByScroll({ left: event.clientX, top: event.clientY });
+    }
     createLassoElement() {
         let element = document.createElement('div');
-        element.classList.add(this.options.class);
+        element.classList.add(this.options.lassoClass);
         return element;
     }
 }
 
-/**
- * An array of default selectors. Intended to be used when specifying selectors for new `Area` instance.
- */
 const defaultSelectors = [
     new MouseSelector(),
-    new RectangleSelector()
+    new RectSelector()
 ];
 
 const defaults = {
     selectable: '.selekter-selectable',
-    selectionClass: 'selekter-selection'
+    selectionClass: 'selekter-selection',
+    selectedClass: 'selekter-selected'
 };
 /**
  * Represents an area containing selectable elements.
@@ -272,7 +269,10 @@ class Area {
         this.options = options;
         this.selection = new Selection();
         this.rootDirty = true;
-        this.onSelection = () => this.root.classList.toggle(this.options.selectionClass, this.selection.size > 0);
+        this.onSelection = (event) => {
+            this.root.classList.toggle(this.options.selectionClass, this.selection.size > 0);
+            event.target.classList.toggle(this.options.selectedClass, event.detail.selected);
+        };
         this.options = Object.assign({}, defaults, options);
         this.observer = this.observeDescendants(root, () => this.rootDirty = true);
         this.selectorDisconnectors = this.lastUniqueByConstructor(selectors).map(s => s.connect(this));
@@ -322,16 +322,6 @@ class Area {
         this.selectorDisconnectors.forEach(disconnect => disconnect());
         this.root.removeEventListener(SELECTION_EVENT, this.onSelection);
     }
-    // private querySelectables(element: Element, selector: string) {
-    //   let acceptNode = (element: Element) => element.matches(selector)
-    //     ? NodeFilter.FILTER_ACCEPT
-    //     : NodeFilter.FILTER_SKIP;
-    //   let selectables = new Set<Element>();
-    //   for (let s, it = document.createNodeIterator(element, NodeFilter.SHOW_ELEMENT, { acceptNode }); s = it.nextNode();) {
-    //     selectables.add(s);
-    //   }
-    //   return selectables;
-    // }
     observeDescendants(root, callback) {
         let observer = new MutationObserver(callback);
         observer.observe(root, { childList: true, subtree: true });
@@ -342,4 +332,6 @@ class Area {
     }
 }
 
-export { defaultSelectors, Area, Bound, MouseSelector, RectangleSelector, SELECTION_EVENT, Selection };
+//# sourceMappingURL=Selector.js.map
+
+export { defaultSelectors, Area, Rect, MouseSelector, RectSelector, SELECTION_EVENT, Selection };
