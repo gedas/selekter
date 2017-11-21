@@ -2,11 +2,7 @@ import { Selection, SelectionEvent, SELECTION_EVENT } from './Selection';
 import { Selector, SelectorDisconnector } from './Selector';
 import defaultSelectors from './defaultSelectors';
 
-/**
- * Various area options.
- */
 export interface AreaOptions {
-
   /**
    * CSS selector that specifies an element in a subtree of root element that can be selected.
    */
@@ -17,6 +13,9 @@ export interface AreaOptions {
    */
   selectionClass: string;
 
+  /**
+   * A style class to be added to selected element.
+   */
   selectedClass: string;
 }
 
@@ -31,28 +30,28 @@ const defaults: Partial<AreaOptions> = {
  */
 export class Area {
   private selection = new Selection();
-  private filtered: Set<Element>;
+  private selectables: Set<Element>;
   private rootDirty = true;
   private selectorDisconnectors: SelectorDisconnector[];
   private observer: MutationObserver;
   
   private onSelection = (event: SelectionEvent) => {
     this.root.classList.toggle(this.options.selectionClass, this.selection.size > 0);
-    (event.target as Element).classList.toggle(this.options.selectedClass, event.detail.selected);
+    event.target.classList.toggle(this.options.selectedClass, event.detail.selected);
   }
 
   /**
    * Creates an `Area`.
    * 
    * @param root The root element.
-   * @param options Set of area options. Direct children of a `root` element will be selectable by default.
+   * @param options The area options.
    * @param selectors Selectors to be registered for this area. Subsequent selectors will override preceding selectors
    *   of the same type and won't be added more than once. Use this parameter to change configuration of default
    *   selectors or add new ones.
    *   ~~~
    *   [
    *     ...defaultSelectors,
-   *     new RectangleSelector({ minEdge: 20 }), // will override default rectangle selector
+   *     new RectSelector({ minEdge: 20 }), // will override default rect selector
    *     new FooSelector()
    *   ]
    *   ~~~
@@ -69,19 +68,9 @@ export class Area {
   /**
    * Returns the current selection.
    * 
-   * Modifying this selection will result in selection events being dispatched. Unlike `getFiltered()`, this set is
-   * updated instead of being recreated when `root` DOM subtree mutates. Therefore, it is guaranteed that the same
+   * Modifying this selection will result in selection events being dispatched. Unlike `getSelectables()`, selection is
+   * updated instead of being recreated when `root` subtree changes. Therefore, it is guaranteed that the same
    * `Selection` instance will be referenced during `Area` object lifetime.
-   * 
-   * @example
-   * ~~~
-   * let root = document.body;
-   * root.addEventListener('selection', (event: SelectionEvent) =>
-   *   console.log(`${event.target} selected: ${event.detail.selected}`));
-   * 
-   * let area = new Area(root);
-   * area.getSelection().add([...area.getFiltered()]) // Select all
-   * ~~~
    */
   getSelection() {
     if (this.rootDirty) {
@@ -92,15 +81,15 @@ export class Area {
   }
 
   /**
-   * Returns a set of selectable elements determined by `filter` option.
-   * Set is recreated each time element is added or removed from `root` DOM subtree.
+   * Returns a set of selectable elements queried by `selectable` option.
+   * Set is recreated each time `root` subtree changes.
    */
   getSelectables() {
     if (this.rootDirty) {
-      this.filtered = new Set([...this.root.querySelectorAll(this.options.selectable)]);
+      this.selectables = new Set([...this.root.querySelectorAll(this.options.selectable)]);
       this.rootDirty = false;
     }
-    return this.filtered;
+    return this.selectables;
   }
 
   /**

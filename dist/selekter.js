@@ -5,36 +5,38 @@
 	(factory((global.selekter = {})));
 }(this, (function (exports) { 'use strict';
 
-class ObservableSet extends Set {
-    constructor(values, observer) {
-        super();
-        this.observer = observer;
-    }
-    add(value) {
-        let had = super.has(value);
-        super.add(value);
-        if (!had) {
-            this.observer(value, true);
-        }
-        return this;
-    }
-    delete(value) {
-        return super.delete(value) && (this.observer(value, false), true);
-    }
-    clear() {
-        let values = Array.from(this.values());
-        super.clear();
-        values.forEach(value => this.observer(value, false));
-    }
-}
-
+/**
+ * The type of selection event.
+ */
 const SELECTION_EVENT = 'selection';
 /**
  * Represents a set of selected elements. Selection events will be published for each element being added or removed.
  */
-class Selection extends ObservableSet {
+class Selection {
     constructor(elements) {
-        super(elements, (element, selected) => this.dispatchSelectionEvent(element, selected));
+        this.elements = new Set(elements);
+    }
+    add(element) {
+        let had = this.elements.has(element);
+        this.elements.add(element);
+        if (!had) {
+            this.dispatchSelectionEvent(element, true);
+        }
+        return this;
+    }
+    delete(element) {
+        return this.elements.delete(element) && (this.dispatchSelectionEvent(element, false), true);
+    }
+    clear() {
+        let elements = Array.from(this.elements.values());
+        this.elements.clear();
+        elements.forEach(x => this.dispatchSelectionEvent(x, false));
+    }
+    has(element) {
+        return this.elements.has(element);
+    }
+    get size() {
+        return this.elements.size;
     }
     /**
      * Toggles selection state of the `element`.
@@ -63,7 +65,7 @@ class Selection extends ObservableSet {
      * @param other The set being intersected with this selection.
      */
     intersect(other) {
-        this.forEach(x => !other.has(x) && this.delete(x));
+        this.elements.forEach(x => !other.has(x) && this.delete(x));
     }
     dispatchSelectionEvent(element, selected) {
         element.dispatchEvent(new CustomEvent(SELECTION_EVENT, {
@@ -75,14 +77,13 @@ class Selection extends ObservableSet {
 
 const matches = Element.prototype.matches || Element.prototype.msMatchesSelector;
 const defaults$1 = {
-    tick: '.selekter-tick',
-    closestSelectable: (event, area) => event.target.closest(area.options.selectable)
+    tick: '.selekter-tick'
 };
 class MouseSelector {
     constructor(options) {
         this.options = options;
         this.onClick = (event) => {
-            let selectable = this.options.closestSelectable(event, this.area);
+            let selectable = event.target.closest(this.area.options.selectable);
             if (selectable) {
                 let selection = this.area.getSelection();
                 if (matches.call(event.target, this.options.tick) || selection.size > 0) {
@@ -258,14 +259,14 @@ class Area {
      * Creates an `Area`.
      *
      * @param root The root element.
-     * @param options Set of area options. Direct children of a `root` element will be selectable by default.
+     * @param options The area options.
      * @param selectors Selectors to be registered for this area. Subsequent selectors will override preceding selectors
      *   of the same type and won't be added more than once. Use this parameter to change configuration of default
      *   selectors or add new ones.
      *   ~~~
      *   [
      *     ...defaultSelectors,
-     *     new RectangleSelector({ minEdge: 20 }), // will override default rectangle selector
+     *     new RectSelector({ minEdge: 20 }), // will override default rect selector
      *     new FooSelector()
      *   ]
      *   ~~~
@@ -287,19 +288,9 @@ class Area {
     /**
      * Returns the current selection.
      *
-     * Modifying this selection will result in selection events being dispatched. Unlike `getFiltered()`, this set is
-     * updated instead of being recreated when `root` DOM subtree mutates. Therefore, it is guaranteed that the same
+     * Modifying this selection will result in selection events being dispatched. Unlike `getSelectables()`, selection is
+     * updated instead of being recreated when `root` subtree changes. Therefore, it is guaranteed that the same
      * `Selection` instance will be referenced during `Area` object lifetime.
-     *
-     * @example
-     * ~~~
-     * let root = document.body;
-     * root.addEventListener('selection', (event: SelectionEvent) =>
-     *   console.log(`${event.target} selected: ${event.detail.selected}`));
-     *
-     * let area = new Area(root);
-     * area.getSelection().add([...area.getFiltered()]) // Select all
-     * ~~~
      */
     getSelection() {
         if (this.rootDirty) {
@@ -309,15 +300,15 @@ class Area {
         return this.selection;
     }
     /**
-     * Returns a set of selectable elements determined by `filter` option.
-     * Set is recreated each time element is added or removed from `root` DOM subtree.
+     * Returns a set of selectable elements queried by `selectable` option.
+     * Set is recreated each time `root` subtree changes.
      */
     getSelectables() {
         if (this.rootDirty) {
-            this.filtered = new Set([...this.root.querySelectorAll(this.options.selectable)]);
+            this.selectables = new Set([...this.root.querySelectorAll(this.options.selectable)]);
             this.rootDirty = false;
         }
-        return this.filtered;
+        return this.selectables;
     }
     /**
      * Destroys the area by disconnecting all connected selectors.
@@ -337,8 +328,6 @@ class Area {
         return array.reduceRight((arr, s) => (!arr.some(x => x.constructor === s.constructor) && arr.push(s), arr), []);
     }
 }
-
-//# sourceMappingURL=Selector.js.map
 
 exports.defaultSelectors = defaultSelectors;
 exports.Area = Area;

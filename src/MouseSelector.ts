@@ -4,14 +4,14 @@ import { Selector, SelectorDisconnector } from './Selector';
 const matches = Element.prototype.matches || Element.prototype.msMatchesSelector;
 
 export interface MouseSelectorOptions {
+  /**
+   * CSS selector that specifies an element that when clicked will select closest selectable.
+   */
   tick: string;
-  closestSelectable(event: MouseEvent, area: Area);
 }
 
 const defaults: MouseSelectorOptions = {
-  tick: '.selekter-tick',
-  closestSelectable: (event, area) =>
-    (event.target as Element).closest(area.options.selectable)
+  tick: '.selekter-tick'
 };
 
 export class MouseSelector implements Selector {
@@ -28,7 +28,7 @@ export class MouseSelector implements Selector {
   }
 
   private onClick = (event: MouseEvent) => {
-    let selectable = this.options.closestSelectable(event, this.area);
+    let selectable = (event.target as Element).closest(this.area.options.selectable);
     if (selectable) {
       let selection = this.area.getSelection();
       if (matches.call(event.target, this.options.tick) || selection.size > 0) {

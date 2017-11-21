@@ -1,5 +1,3 @@
-import { ObservableSet, Observer } from './ObservableSet';
-
 /**
  * The type of selection event.
  */
@@ -9,15 +7,45 @@ export const SELECTION_EVENT = 'selection';
  * Represents a selection event published when element has been selected or deselected. 
  */
 export interface SelectionEvent extends CustomEvent {
+  readonly target: Element;
   readonly detail: { selected: boolean };
 }
 
 /**
  * Represents a set of selected elements. Selection events will be published for each element being added or removed.
+ * Selection event does bubble.
  */
-export class Selection extends ObservableSet<Element> {
+export class Selection {
+
+  private elements: Set<Element>;
+
   constructor(elements?: Iterable<Element>) {
-    super(elements, (element, selected) => this.dispatchSelectionEvent(element, selected));
+    this.elements = new Set<Element>(elements);
+  }
+
+  get size() {
+    return this.elements.size;
+  }
+
+  add(element: Element) {
+    let had = this.elements.has(element);
+    this.elements.add(element);
+    if (!had) {
+      this.notify(element, true);
+    }
+    return this;
+  }
+
+  delete(element: Element) {
+    return this.elements.delete(element) && !this.notify(element, false);
+  }
+
+  has(element: Element) {
+    return this.elements.has(element);
+  }
+
+  clear() {
+    this.elements.forEach(x => this.delete(x));
   }
 
   /**
@@ -32,7 +60,7 @@ export class Selection extends ObservableSet<Element> {
    */
   toggle(element: Element, force?: boolean) {
     if (force === undefined) {
-      return !(this.delete(element) || !this.add(element));
+      return !this.delete(element) && !!this.add(element);
     }
     if (force) {
       this.add(element);
@@ -47,10 +75,10 @@ export class Selection extends ObservableSet<Element> {
    * @param other The set being intersected with this selection.
    */
   intersect(other: Set<Element>) {
-    this.forEach(x => !other.has(x) && this.delete(x));
+    this.elements.forEach(x => !other.has(x) && this.delete(x));
   }
 
-  private dispatchSelectionEvent(element: Element, selected: boolean) {
+  private notify(element: Element, selected: boolean) {
     element.dispatchEvent(new CustomEvent(SELECTION_EVENT, {
       bubbles: true,
       detail: { selected }
