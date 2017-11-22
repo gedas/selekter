@@ -27,6 +27,10 @@ export class Selection {
     return this.elements.size;
   }
 
+  values() {
+    return this.elements.values();
+  }
+
   add(element: Element) {
     let had = this.elements.has(element);
     this.elements.add(element);

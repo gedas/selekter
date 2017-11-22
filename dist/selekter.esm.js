@@ -14,6 +14,9 @@ class Selection {
     get size() {
         return this.elements.size;
     }
+    values() {
+        return this.elements.values();
+    }
     add(element) {
         let had = this.elements.has(element);
         this.elements.add(element);
@@ -143,7 +146,9 @@ class RectSelector extends Rect {
         this.onMouseDown = (event) => {
             if (event.button === 0 && (event.target === document.documentElement || event.target === this.area.root)) {
                 this.origin = this.getPageCoordinates(event);
-                this.preserveSelection = event.ctrlKey || event.metaKey;
+                this.preservedSelection = event.ctrlKey || event.metaKey
+                    ? new Set(this.area.getSelection().values())
+                    : null;
                 document.addEventListener('mousemove', this.onMouseMove);
                 document.addEventListener('mouseup', this.onMouseUp);
                 event.preventDefault();
@@ -156,33 +161,27 @@ class RectSelector extends Rect {
             this.left = Math.min(this.origin.left, mouse.left);
             this.width = Math.abs(this.origin.left - mouse.left);
             this.height = Math.abs(this.origin.top - mouse.top);
-            if (this.edgeLongerThan(this.options.minEdge)) {
+            if (this.setVisible(this.lasso, this.edgeLongerThan(this.options.minEdge))) {
                 if (!this.lasso) {
                     this.lasso = this.options.appendTo.appendChild(this.createLassoElement());
                 }
                 this.requestRender();
-                this.setVisible(true);
-            }
-            else if (this.lasso) {
-                this.setVisible(false);
             }
             this.update();
         };
         this.onMouseUp = () => {
             this.cancelRender();
             this.update();
-            this.setVisible(false);
             this.width = this.height = 0;
+            this.setVisible(this.lasso, false);
             document.removeEventListener('mousemove', this.onMouseMove);
             document.removeEventListener('mouseup', this.onMouseUp);
         };
         this.update = () => {
             let selection = this.area.getSelection();
-            this.area.getSelectables().forEach(element => {
-                selection.toggle(element, this.preserveSelection
-                    && selection.has(element)
-                    || this.edgeLongerThan(this.options.minEdge)
-                        && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(element)))));
+            this.area.getSelectables().forEach(s => {
+                selection.toggle(s, (this.preservedSelection && this.preservedSelection.has(s))
+                    || (this.edgeLongerThan(this.options.minEdge) && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(s))))));
             });
         };
         this.render = () => {
@@ -211,8 +210,9 @@ class RectSelector extends Rect {
             this.pendingRenderID = 0;
         }
     }
-    setVisible(visible) {
-        this.lasso.style.display = visible ? '' : 'none';
+    setVisible(element, visible) {
+        element && (element.style.display = visible ? '' : 'none');
+        return visible;
     }
     edgeLongerThan(length) {
         return this.width >= length || this.height >= length;

@@ -29,8 +29,8 @@ export class RectSelector extends Rect implements Selector {
 
   private origin: Offset;
   private pendingRenderID: number;
-  private preserveSelection: boolean;
-  
+  private preservedSelection: Set<Element>;
+
   constructor(private options?: Partial<RectSelectorOptions>) {
     super();
     this.options = {...defaults, ...options};
@@ -45,7 +45,10 @@ export class RectSelector extends Rect implements Selector {
   private onMouseDown = (event: MouseEvent) => {
     if (event.button === 0 && (event.target === document.documentElement || event.target === this.area.root)) {
       this.origin = this.getPageCoordinates(event);
-      this.preserveSelection = event.ctrlKey || event.metaKey;
+      this.preservedSelection = event.ctrlKey || event.metaKey
+        ? new Set(this.area.getSelection().values())
+        : null;
+
       document.addEventListener('mousemove', this.onMouseMove);
       document.addEventListener('mouseup', this.onMouseUp);
       event.preventDefault();
@@ -61,14 +64,11 @@ export class RectSelector extends Rect implements Selector {
     this.width = Math.abs(this.origin.left - mouse.left);
     this.height = Math.abs(this.origin.top - mouse.top);
 
-    if (this.edgeLongerThan(this.options.minEdge)) {
+    if (this.setVisible(this.lasso, this.edgeLongerThan(this.options.minEdge))) {
       if (!this.lasso) {
         this.lasso = this.options.appendTo.appendChild(this.createLassoElement());
       }
       this.requestRender();
-      this.setVisible(true);
-    } else if (this.lasso) {
-      this.setVisible(false);
     }
     this.update();
   }
@@ -76,9 +76,9 @@ export class RectSelector extends Rect implements Selector {
   private onMouseUp = () => {
     this.cancelRender();
     this.update();
-    this.setVisible(false);
-
+    
     this.width = this.height = 0;
+    this.setVisible(this.lasso, false);
 
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
@@ -86,11 +86,10 @@ export class RectSelector extends Rect implements Selector {
 
   private update = () => {
     let selection = this.area.getSelection();
-    this.area.getSelectables().forEach(element => {
-      selection.toggle(element, this.preserveSelection
-        && selection.has(element)
-        || this.edgeLongerThan(this.options.minEdge)
-        && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(element)))));
+    this.area.getSelectables().forEach(s => {
+      selection.toggle(s,
+        (this.preservedSelection && this.preservedSelection.has(s))
+        || (this.edgeLongerThan(this.options.minEdge) && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(s))))));    
     });
   }
 
@@ -116,8 +115,9 @@ export class RectSelector extends Rect implements Selector {
     this.pendingRenderID = 0;
   }
 
-  private setVisible(visible: boolean) {
-    this.lasso.style.display = visible ? '' : 'none';
+  private setVisible(element: HTMLElement, visible: boolean) {
+    element && (element.style.display = visible ? '' : 'none');
+    return visible;
   }
 
   private edgeLongerThan(length: number) {
