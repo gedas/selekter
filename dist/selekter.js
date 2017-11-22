@@ -11,32 +11,31 @@
 const SELECTION_EVENT = 'selection';
 /**
  * Represents a set of selected elements. Selection events will be published for each element being added or removed.
+ * Selection event does bubble.
  */
 class Selection {
     constructor(elements) {
         this.elements = new Set(elements);
     }
+    get size() {
+        return this.elements.size;
+    }
     add(element) {
         let had = this.elements.has(element);
         this.elements.add(element);
         if (!had) {
-            this.dispatchSelectionEvent(element, true);
+            this.notify(element, true);
         }
         return this;
     }
     delete(element) {
-        return this.elements.delete(element) && (this.dispatchSelectionEvent(element, false), true);
-    }
-    clear() {
-        let elements = Array.from(this.elements.values());
-        this.elements.clear();
-        elements.forEach(x => this.dispatchSelectionEvent(x, false));
+        return this.elements.delete(element) && !this.notify(element, false);
     }
     has(element) {
         return this.elements.has(element);
     }
-    get size() {
-        return this.elements.size;
+    clear() {
+        this.elements.forEach(x => this.delete(x));
     }
     /**
      * Toggles selection state of the `element`.
@@ -50,7 +49,7 @@ class Selection {
      */
     toggle(element, force) {
         if (force === undefined) {
-            return !(this.delete(element) || !this.add(element));
+            return !this.delete(element) && !!this.add(element);
         }
         if (force) {
             this.add(element);
@@ -67,7 +66,7 @@ class Selection {
     intersect(other) {
         this.elements.forEach(x => !other.has(x) && this.delete(x));
     }
-    dispatchSelectionEvent(element, selected) {
+    notify(element, selected) {
         element.dispatchEvent(new CustomEvent(SELECTION_EVENT, {
             bubbles: true,
             detail: { selected }
