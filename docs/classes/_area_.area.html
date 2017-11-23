@@ -97,11 +97,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_area_.area.html#filtered" class="tsd-kind-icon">filtered</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_area_.area.html#observer" class="tsd-kind-icon">observer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_area_.area.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_area_.area.html#root" class="tsd-kind-icon">root</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_area_.area.html#rootdirty" class="tsd-kind-icon">root<wbr>Dirty</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_area_.area.html#selectables" class="tsd-kind-icon">selectables</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_area_.area.html#selection" class="tsd-kind-icon">selection</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_area_.area.html#selectordisconnectors" class="tsd-kind-icon">selector<wbr>Disconnectors</a></li>
 							</ul>
@@ -132,7 +132,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:41</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L49">Area.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -154,7 +154,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_area_.areaoptions.html" class="tsd-signature-type">AreaOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>Set of area options. Direct children of a <code>root</code> element will be selectable by default.</p>
+											<p>The area options.</p>
 										</div>
 									</div>
 								</li>
@@ -162,13 +162,13 @@
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> selectors: <a href="../interfaces/_selector_.selector.html" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;defaultSelectors</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>Selectors to be registered for this area. Subsequent selectors will override preceding selectors
-												of the same type and won&#39;t be added more than once. Use this parameter to change configuration of default
-											selectors or add new ones.</p>
+											<p>Selectors to be registered for this area. Subsequent
+												selectors will override preceding selectors of the same type and won&#39;t
+												be added more than once. Use this parameter to change the configuration
+											of default selectors or add new ones.</p>
 											<pre><code>  [
     ...defaultSelectors,
-    <span class="hljs-keyword">new</span> <span class="hljs-type">RectangleSelector</span>({ minEdge: <span class="hljs-type">20 </span>}), <span class="hljs-comment">// will override default rectangle selector</span>
-    <span class="hljs-keyword">new</span> <span class="hljs-type">FooSelector</span>()
+    new RectSelector({ threshold: <span class="hljs-number">20</span> }), // override default
   ]
 </code></pre>
 										</div>
@@ -183,22 +183,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="filtered" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> filtered</h3>
-					<div class="tsd-signature tsd-kind-icon">filtered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in Area.ts:35</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="observer" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> observer</h3>
 					<div class="tsd-signature tsd-kind-icon">observer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutationObserver</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:38</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L44">Area.ts:44</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -208,12 +198,12 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_area_.areaoptions.html" class="tsd-signature-type">AreaOptions</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:59</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L67">Area.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Set of area options. Direct children of a <code>root</code> element will be selectable by default.</p>
+							<p>The area options.</p>
 						</div>
 					</div>
 				</section>
@@ -223,7 +213,7 @@
 					<div class="tsd-signature tsd-kind-icon">root<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:59</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L67">Area.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +228,17 @@
 					<div class="tsd-signature tsd-kind-icon">root<wbr>Dirty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:36</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L42">Area.ts:42</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="selectables" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> selectables</h3>
+					<div class="tsd-signature tsd-kind-icon">selectables<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L41">Area.ts:41</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -248,7 +248,7 @@
 					<div class="tsd-signature tsd-kind-icon">selection<span class="tsd-signature-symbol">:</span> <a href="_selection_.selection.html" class="tsd-signature-type">Selection</a><span class="tsd-signature-symbol"> =&nbsp;new Selection()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:34</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L40">Area.ts:40</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -258,7 +258,7 @@
 					<div class="tsd-signature tsd-kind-icon">selector<wbr>Disconnectors<span class="tsd-signature-symbol">:</span> <a href="../modules/_selector_.html#selectordisconnector" class="tsd-signature-type">SelectorDisconnector</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:37</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L43">Area.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -275,7 +275,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:109</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L108">Area.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -298,13 +298,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:97</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L96">Area.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns a set of selectable elements determined by <code>filter</code> option.
-									Set is recreated each time element is added or removed from <code>root</code> DOM subtree.</p>
+									<p>Returns a set of selectable elements queried by <code>selectable</code> option.
+									Set is recreated each time <code>root</code> subtree changes.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -321,26 +321,17 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:85</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L84">Area.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Returns the current selection.</p>
 								</div>
-								<p>Modifying this selection will result in selection events being dispatched. Unlike <code>getFiltered()</code>, this set is
-									updated instead of being recreated when <code>root</code> DOM subtree mutates. Therefore, it is guaranteed that the same
-								<code>Selection</code> instance will be referenced during <code>Area</code> object lifetime.</p>
-								<dl class="tsd-comment-tags">
-									<dt>example</dt>
-									<dd><pre><code><span class="hljs-keyword">let</span> root = <span class="hljs-built_in">document</span>.body;
-root.addEventListener(<span class="hljs-string">'selection'</span>, <span class="hljs-function">(<span class="hljs-params">event: SelectionEvent</span>) =&gt;</span>
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${event.target}</span> selected: <span class="hljs-subst">${event.detail.selected}</span>`</span>));
-
-<span class="hljs-keyword">let</span> area = <span class="hljs-keyword">new</span> Area(root);
-area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// Select all</span>
-</code></pre></dd>
-								</dl>
+								<p>Modifying this selection will result in selection events being dispatched.
+									Unlike <code>getSelectables()</code>, selection is updated and not recreated when
+									<code>root</code> subtree changes. Therefore, it is guaranteed that the same
+								<code>Selection</code> instance will be referenced.</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_selection_.selection.html" class="tsd-signature-type">Selection</a></h4>
 						</li>
@@ -356,7 +347,7 @@ area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// S
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:133</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L120">Area.ts:120</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -385,7 +376,7 @@ area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// S
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:127</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L114">Area.ts:114</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -405,16 +396,22 @@ area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// S
 					<a name="onselection" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Selection</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Selection<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/_selection_.selectionevent.html" class="tsd-signature-type">SelectionEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Area.ts:40</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L46">Area.ts:46</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <a href="../interfaces/_selection_.selectionevent.html" class="tsd-signature-type">SelectionEvent</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -430,16 +427,13 @@ area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// S
 						<a href="../modules/_area_.html">"<wbr>Area"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_bound_.html">"<wbr>Bound"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_mouseselector_.html">"<wbr>Mouse<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_observableset_.html">"<wbr>Observable<wbr>Set"</a>
+						<a href="../modules/_rect_.html">"<wbr>Rect"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_rectangleselector_.html">"<wbr>Rectangle<wbr>Selector"</a>
+						<a href="../modules/_rectselector_.html">"<wbr>Rect<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_selection_.html">"<wbr>Selection"</a>
@@ -466,9 +460,6 @@ area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// S
 								<a href="_area_.area.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_area_.area.html#filtered" class="tsd-kind-icon">filtered</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_area_.area.html#observer" class="tsd-kind-icon">observer</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -479,6 +470,9 @@ area.getSelection().add([...area.getFiltered()]) <span class="hljs-comment">// S
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_area_.area.html#rootdirty" class="tsd-kind-icon">root<wbr>Dirty</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_area_.area.html#selectables" class="tsd-kind-icon">selectables</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_area_.area.html#selection" class="tsd-kind-icon">selection</a>

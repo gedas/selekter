@@ -64,23 +64,42 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p>Selection management model for DOM elements.</p>
 				<h1 id="selekter">selekter</h1>
+				<p><img src="https://user-images.githubusercontent.com/136955/33159206-747a18a8-d019-11e7-9626-9865820ecff2.jpg" alt="selekter"></p>
+				<h2 id="about">About</h2>
 				<p>Selekter is a selection model for DOM. It features both selection management and tooling. Selekter provides a set of tools, such as rectangular lasso tool, for selecting elements in the DOM. This library is particularly preeminent when it comes to selecting elements laid out in a grid.</p>
 				<h2 id="install">Install</h2>
-				<pre><code class="lang-bash">$ npm install selekter
+				<pre><code class="lang-bash">$ npm install selekter --save
 </code></pre>
+				<p>Selekter depends on the following modern JavaScript features:</p>
+				<ul>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set"><code>Set</code></a>  (with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values"><code>values()</code></a> and <code>new Set(iterable)</code> constructor)</li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver"><code>MutationObserver</code></a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>Element.closest</code></a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent"><code>CustomEvent</code></a> (constructor)</li>
+				</ul>
+				<p>Please use polyfills if one of those is not supported by your browser.</p>
 				<h2 id="usage">Usage</h2>
-				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Area, SelectionEvent, SELECTION_EVENT } <span class="hljs-keyword">from</span> <span class="hljs-string">'selekter'</span>;
+				<p>Let&#39;s start with creating new <code>Area</code>.</p>
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Area } <span class="hljs-keyword">from</span> <span class="hljs-string">'selekter'</span>;
 
-<span class="hljs-keyword">let</span> root = <span class="hljs-built_in">document</span>.body;
-root.addEventListener(SELECTION_EVENT, <span class="hljs-function">(<span class="hljs-params">event: SelectionEvent</span>) =&gt;</span>
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${event.target}</span>`</span> was ${event.detail.selected ? <span class="hljs-string">'selected'</span> : <span class="hljs-string">'deselected'</span>}));
-
+<span class="hljs-keyword">let</span> root = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'.area'</span>);
 <span class="hljs-keyword">new</span> Area(root);
 </code></pre>
+				<p>This will make all <code>.selekter-selectable</code> inside <code>.area</code> selectable. The <code>.selekter-selectable</code> is the default CSS selector and can be changed in options. Each time selection changes, custom <code>selection</code> event for that selectable element will be dispatched. The selection event bubbles to the top so we can add event listener to root element only:</p>
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { SelectionEvent, SELECTION_EVENT } <span class="hljs-keyword">from</span> <span class="hljs-string">'selekter'</span>;
+
+root.addEventListener(SELECTION_EVENT, <span class="hljs-function">(<span class="hljs-params">event: SelectionEvent</span>) =&gt;</span>
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${event.target}</span>`</span> was ${event.detail.selected ? <span class="hljs-string">'selected'</span> : <span class="hljs-string">'deselected'</span>}));
+</code></pre>
+				<p>If default selection tool options are unfavorable or custom selectors are needed, pass them to <code>Area</code> constructor as a third parameter. For example:</p>
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { defaultSelectors, RectSelector } <span class="hljs-keyword">from</span> <span class="hljs-string">'selekter'</span>;
+
+<span class="hljs-keyword">new</span> Area(root, { <span class="hljs-comment">/* options */</span> }, [ ...defaultSelectors, <span class="hljs-keyword">new</span> RectSelector({ threshold: <span class="hljs-number">20</span> }) ]);
+</code></pre>
+				<p>This will result in rectangular selector with new threshold taking precedence over default selector.</p>
 				<h2 id="license">License</h2>
-				<p>MIT</p>
+				<p><a href="LICENSE">MIT</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -93,16 +112,13 @@ root.addEventListener(SELECTION_EVENT, <span class="hljs-function">(<span class=
 						<a href="modules/_area_.html">"<wbr>Area"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_bound_.html">"<wbr>Bound"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_mouseselector_.html">"<wbr>Mouse<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_observableset_.html">"<wbr>Observable<wbr>Set"</a>
+						<a href="modules/_rect_.html">"<wbr>Rect"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_rectangleselector_.html">"<wbr>Rectangle<wbr>Selector"</a>
+						<a href="modules/_rectselector_.html">"<wbr>Rect<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_selection_.html">"<wbr>Selection"</a>

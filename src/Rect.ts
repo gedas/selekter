@@ -1,6 +1,7 @@
 /**
  * An alias for object having left and right coordinates, width and height.
- * For example, other `Rect` object or [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect).
+ * For example, other `Rect` object or
+ * [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect).
  */
 export type RectLike = {left: number, top: number, width: number, height: number};
 
@@ -11,8 +12,9 @@ export class Rect {
   
   /**
    * Creates a new rectangle with specified coordinates and size.
+   * 
    * @param left The X coordinate of the left side of the rectangle.
-   * @param top The Y coordinate of the top of the rectangle.
+   * @param top  The Y coordinate of the top of the rectangle.
    * @param width The width of the rectangle.
    * @param height The height of the rectangle.
    */
@@ -20,6 +22,7 @@ export class Rect {
 
   /**
    * Creates a rectangle from existing rect-like object.
+   * 
    * @param r Other rect-like object to create rectangle from.
    * @example `Rect.from(element.getBoundingClientRect())`
    */
@@ -29,6 +32,7 @@ export class Rect {
 
   /**
    * Determines whether this rectangle intersects other rect-like object.
+   * 
    * @param r The specified rect-like object.
    */
   intersects(r: RectLike) {

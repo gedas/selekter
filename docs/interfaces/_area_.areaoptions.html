@@ -69,13 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Various area options.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -92,6 +85,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_area_.areaoptions.html#selectable" class="tsd-kind-icon">selectable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_area_.areaoptions.html#selectedclass" class="tsd-kind-icon">selected<wbr>Class</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_area_.areaoptions.html#selectionclass" class="tsd-kind-icon">selection<wbr>Class</a></li>
 							</ul>
 						</section>
@@ -106,19 +100,37 @@
 					<div class="tsd-signature tsd-kind-icon">selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:17</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L12">Area.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Determines whether <code>element</code> can be selected. Called for each element in the subtree based at area root element.</p>
+							<p>CSS selector that specifies an element in a subtree of root element that
+							can be selected.</p>
 						</div>
 						<dl class="tsd-comment-tags">
-							<dt>param</dt>
-							<dd><p>An element to be considered.</p>
+							<dt>default</dt>
+							<dd><p><code>.selekter-selectable</code></p>
 							</dd>
-							<dt>returns</dt>
-							<dd><p><code>true</code> if element can be selected.</p>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="selectedclass" class="tsd-anchor"></a>
+					<h3>selected<wbr>Class</h3>
+					<div class="tsd-signature tsd-kind-icon">selected<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L27">Area.ts:27</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A style class to be added to selected element.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p><code>selekter-selected</code></p>
 							</dd>
 						</dl>
 					</div>
@@ -129,13 +141,19 @@
 					<div class="tsd-signature tsd-kind-icon">selection<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Area.ts:22</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Area.ts#L20">Area.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A style class to be added to area root element when there are elements selected.</p>
+							<p>A style class to be added to area root element when there are elements
+							selected.</p>
 						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p><code>selekter-selection</code></p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 			</section>
@@ -150,16 +168,13 @@
 						<a href="../modules/_area_.html">"<wbr>Area"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_bound_.html">"<wbr>Bound"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_mouseselector_.html">"<wbr>Mouse<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_observableset_.html">"<wbr>Observable<wbr>Set"</a>
+						<a href="../modules/_rect_.html">"<wbr>Rect"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_rectangleselector_.html">"<wbr>Rectangle<wbr>Selector"</a>
+						<a href="../modules/_rectselector_.html">"<wbr>Rect<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_selection_.html">"<wbr>Selection"</a>
@@ -187,6 +202,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_area_.areaoptions.html#selectable" class="tsd-kind-icon">selectable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_area_.areaoptions.html#selectedclass" class="tsd-kind-icon">selected<wbr>Class</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_area_.areaoptions.html#selectionclass" class="tsd-kind-icon">selection<wbr>Class</a>

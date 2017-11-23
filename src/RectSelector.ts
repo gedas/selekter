@@ -5,15 +5,39 @@ import { Rect, RectLike } from './Rect';
 import './RectSelector.css';
 
 export interface RectSelectorOptions {
+  /**
+   * A style class to be added to lasso element.
+   * 
+   * @default `selekter-lasso`
+   */
   lassoClass: string;
-  minEdge: number;
+
+  /**
+   * The minimum length of lasso edge in pixels for lasso to be visible.
+   * 
+   * @default `10`
+   */
+  threshold: number;
+
+  /**
+   * The element to append lasso to. Defaults to document body.
+   */
   appendTo: Element;
+
+  /**
+   * Returns rectangular boundary of the selectable element. Invoked for each
+   * selectable element in order to test whether element intersects the lasso.
+   * 
+   * Defaults to `element.getBoundingClientRect()`.
+   * 
+   * @param element The selectable element.
+   */
   boundary(element: Element): RectLike;
 }
 
 const defaults: RectSelectorOptions = {
   lassoClass: 'selekter-lasso',
-  minEdge: 10,
+  threshold: 10,
   boundary: element => element.getBoundingClientRect(),
   appendTo: document.body
 }
@@ -23,6 +47,12 @@ interface Offset {
   top: number;
 }
 
+/**
+ * A selector that makes it possible to select elements while pressing and
+ * moving the mouse creating a region. This rectangular region is known as
+ * lasso. The elements whose boundaries intersect with the lasso will be
+ * selected.
+ */
 export class RectSelector extends Rect implements Selector {
   private area: Area;
   private lasso: HTMLElement;
@@ -64,7 +94,7 @@ export class RectSelector extends Rect implements Selector {
     this.width = Math.abs(this.origin.left - mouse.left);
     this.height = Math.abs(this.origin.top - mouse.top);
 
-    if (this.setVisible(this.lasso, this.edgeLongerThan(this.options.minEdge))) {
+    if (this.setVisible(this.lasso, this.doesEdgePassThreshold())) {
       if (!this.lasso) {
         this.lasso = this.options.appendTo.appendChild(this.createLassoElement());
       }
@@ -89,7 +119,7 @@ export class RectSelector extends Rect implements Selector {
     this.area.getSelectables().forEach(s => {
       selection.toggle(s,
         (this.preservedSelection && this.preservedSelection.has(s))
-        || (this.edgeLongerThan(this.options.minEdge) && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(s))))));    
+        || (this.doesEdgePassThreshold() && this.intersects(this.translateByScroll(Rect.from(this.options.boundary(s))))));    
     });
   }
 
@@ -120,8 +150,8 @@ export class RectSelector extends Rect implements Selector {
     return visible;
   }
 
-  private edgeLongerThan(length: number) {
-    return this.width >= length || this.height >= length;
+  private doesEdgePassThreshold() {
+    return this.width >= this.options.threshold || this.height >= this.options.threshold;
   }
 
   private translateByScroll<T extends Offset>(offset: T): T {

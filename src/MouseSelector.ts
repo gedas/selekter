@@ -5,7 +5,10 @@ const matches = Element.prototype.matches || Element.prototype.msMatchesSelector
 
 export interface MouseSelectorOptions {
   /**
-   * CSS selector that specifies an element that when clicked will select closest selectable.
+   * CSS selector that specifies an element that when clicked will select
+   * the closest selectable parent.
+   * 
+   * @default `.selekter-tick`
    */
   tick: string;
 }
@@ -14,6 +17,12 @@ const defaults: MouseSelectorOptions = {
   tick: '.selekter-tick'
 };
 
+/**
+ * A selector that makes it possible to select elements with mouse right click.
+ * 
+ * If selection is empty, then the first element can be selected only with
+ * a tick. Otherwise, elements are selectable by clicking them directly.
+ */
 export class MouseSelector implements Selector {
   private area: Area;
 
@@ -31,7 +40,7 @@ export class MouseSelector implements Selector {
     let selectable = (event.target as Element).closest(this.area.options.selectable);
     if (selectable) {
       let selection = this.area.getSelection();
-      if (matches.call(event.target, this.options.tick) || selection.size > 0) {
+      if (selection.size > 0 || matches.call(event.target, this.options.tick)) {
         selection.toggle(selectable);
       }
     }

@@ -11,9 +11,13 @@ export type SelectorDisconnector = () => void;
 export interface Selector {
 
   /**
-   * Registers this selector on the specified `area`. Performs any initialization logic required by the selector, e.g.
-   * adds respective event listeners. Changes can be revoked through returned function.
-   * @param area The area on which to register.
+   * Registers this selector on the specified `area`.
+   * 
+   * Performs any initialization logic required by the selector, e.g. adds
+   * respective event listeners. Changes can be revoked through returned
+   * function.
+   * 
+   * @param area The area to register this selector to.
    * @returns A function that disconnects registered selector.
    */
   connect(area: Area): SelectorDisconnector;

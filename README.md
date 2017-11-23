@@ -31,7 +31,7 @@ let root = document.querySelector('.area');
 new Area(root);
 ```
 
-This will make all `.selekter-selectable` inside `.area` selectable. The `.selekter-selectable` is the default CSS selector and can be changed in options. Each time selection changes, custom `selection` event for that selectable element will be dispatched. The selection event bubbles to the top so we can add event listener to root element only:
+This will make all `.selekter-selectable` inside `.area` selectable. The `.selekter-selectable` is the default CSS selector and can be changed in options. Each time selection changes, custom `selection` event for that selectable element will be dispatched. The selection event bubbles so we can listen for it directly from the root element:
 
 ```ts
 import { SelectionEvent, SELECTION_EVENT } from 'selekter';
@@ -41,13 +41,14 @@ root.addEventListener(SELECTION_EVENT, (event: SelectionEvent) =>
 ```
 
 If default selection tool options are unfavorable or custom selectors are needed, pass them to `Area` constructor as a third parameter. For example:
+
 ```ts
 import { defaultSelectors, RectSelector } from 'selekter';
 
-new Area(root, { /* options */ }, [ ...defaultSelectors, new RectSelector({ minEdge: 20 }) ]);  
+new Area(root, { /* options */ }, [ ...defaultSelectors, new RectSelector({ threshold: 20 }) ]);  
 ```
 
-This will result in rectangular selector with updated `minEdge` taking precedence over default selector.
+This will result in rectangular selector with new threshold taking precedence over default selector.
 
 ## License
 

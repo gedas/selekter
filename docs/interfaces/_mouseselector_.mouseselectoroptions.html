@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MouseOptions | selekter</title>
+	<title>MouseSelectorOptions | selekter</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_mouseselector_.html">&quot;MouseSelector&quot;</a>
 				</li>
 				<li>
-					<a href="_mouseselector_.mouseoptions.html">MouseOptions</a>
+					<a href="_mouseselector_.mouseselectoroptions.html">MouseSelectorOptions</a>
 				</li>
 			</ul>
-			<h1>Interface MouseOptions</h1>
+			<h1>Interface MouseSelectorOptions</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MouseOptions</span>
+						<span class="target">MouseSelectorOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -84,13 +84,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_mouseselector_.mouseoptions.html#tick" class="tsd-kind-icon">tick</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_mouseselector_.mouseoptions.html#closestselectable" class="tsd-kind-icon">closest<wbr>Selectable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_mouseselector_.mouseselectoroptions.html#tick" class="tsd-kind-icon">tick</a></li>
 							</ul>
 						</section>
 					</div>
@@ -104,38 +98,20 @@
 					<div class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in MouseSelector.ts:7</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/MouseSelector.ts#L13">MouseSelector.ts:13</a></li>
 						</ul>
 					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="closestselectable" class="tsd-anchor"></a>
-					<h3>closest<wbr>Selectable</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">closest<wbr>Selectable<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span>, area<span class="tsd-signature-symbol">: </span><a href="../classes/_area_.area.html" class="tsd-signature-type">Area</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in MouseSelector.ts:8</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
-								</li>
-								<li>
-									<h5>area: <a href="../classes/_area_.area.html" class="tsd-signature-type">Area</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>CSS selector that specifies an element that when clicked will select
+							the closest selectable parent.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p><code>.selekter-tick</code></p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -148,17 +124,14 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_area_.html">"<wbr>Area"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_bound_.html">"<wbr>Bound"</a>
-					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_mouseselector_.html">"<wbr>Mouse<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_observableset_.html">"<wbr>Observable<wbr>Set"</a>
+						<a href="../modules/_rect_.html">"<wbr>Rect"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_rectangleselector_.html">"<wbr>Rectangle<wbr>Selector"</a>
+						<a href="../modules/_rectselector_.html">"<wbr>Rect<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_selection_.html">"<wbr>Selection"</a>
@@ -182,13 +155,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_mouseselector_.mouseoptions.html" class="tsd-kind-icon">Mouse<wbr>Options</a>
+						<a href="_mouseselector_.mouseselectoroptions.html" class="tsd-kind-icon">Mouse<wbr>Selector<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_mouseselector_.mouseoptions.html#tick" class="tsd-kind-icon">tick</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_mouseselector_.mouseoptions.html#closestselectable" class="tsd-kind-icon">closest<wbr>Selectable</a>
+								<a href="_mouseselector_.mouseselectoroptions.html#tick" class="tsd-kind-icon">tick</a>
 							</li>
 						</ul>
 					</li>

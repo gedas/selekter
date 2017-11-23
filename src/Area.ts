@@ -4,22 +4,30 @@ import defaultSelectors from './defaultSelectors';
 
 export interface AreaOptions {
   /**
-   * CSS selector that specifies an element in a subtree of root element that can be selected.
+   * CSS selector that specifies an element in a subtree of root element that
+   * can be selected.
+   * 
+   * @default `.selekter-selectable`
    */
   selectable: string;
   
   /**
-   * A style class to be added to area root element when there are elements selected.
+   * A style class to be added to area root element when there are elements
+   * selected.
+   * 
+   * @default `selekter-selection`
    */
   selectionClass: string;
 
   /**
    * A style class to be added to selected element.
+   * 
+   * @default `selekter-selected`
    */
   selectedClass: string;
 }
 
-const defaults: Partial<AreaOptions> = {
+const defaults: AreaOptions = {
   selectable: '.selekter-selectable',
   selectionClass: 'selekter-selection',
   selectedClass: 'selekter-selected'
@@ -42,17 +50,17 @@ export class Area {
 
   /**
    * Creates an `Area`.
-   * 
+
    * @param root The root element.
    * @param options The area options.
-   * @param selectors Selectors to be registered for this area. Subsequent selectors will override preceding selectors
-   *   of the same type and won't be added more than once. Use this parameter to change configuration of default
-   *   selectors or add new ones.
+   * @param selectors Selectors to be registered for this area. Subsequent
+   *   selectors will override preceding selectors of the same type and won't
+   *   be added more than once. Use this parameter to change the configuration
+   *   of default selectors or add new ones.
    *   ~~~
    *   [
    *     ...defaultSelectors,
-   *     new RectSelector({ minEdge: 20 }), // will override default rect selector
-   *     new FooSelector()
+   *     new RectSelector({ threshold: 20 }), // override default
    *   ]
    *   ~~~
    */
@@ -68,9 +76,10 @@ export class Area {
   /**
    * Returns the current selection.
    * 
-   * Modifying this selection will result in selection events being dispatched. Unlike `getSelectables()`, selection is
-   * updated instead of being recreated when `root` subtree changes. Therefore, it is guaranteed that the same
-   * `Selection` instance will be referenced during `Area` object lifetime.
+   * Modifying this selection will result in selection events being dispatched.
+   * Unlike `getSelectables()`, selection is updated and not recreated when
+   * `root` subtree changes. Therefore, it is guaranteed that the same
+   * `Selection` instance will be referenced.
    */
   getSelection() {
     if (this.rootDirty) {

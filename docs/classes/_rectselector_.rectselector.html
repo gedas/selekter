@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RectangleSelector | selekter</title>
+	<title>RectSelector | selekter</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,27 +56,37 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_rectangleselector_.html">&quot;RectangleSelector&quot;</a>
+					<a href="../modules/_rectselector_.html">&quot;RectSelector&quot;</a>
 				</li>
 				<li>
-					<a href="_rectangleselector_.rectangleselector.html">RectangleSelector</a>
+					<a href="_rectselector_.rectselector.html">RectSelector</a>
 				</li>
 			</ul>
-			<h1>Class RectangleSelector</h1>
+			<h1>Class RectSelector</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A selector that makes it possible to select elements while pressing and
+							moving the mouse creating a region. This rectangular region is known as
+							lasso. The elements whose boundaries intersect with the lasso will be
+						selected.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_bound_.bound.html" class="tsd-signature-type">Bound</a>
+						<a href="_rect_.rect.html" class="tsd-signature-type">Rect</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">RectangleSelector</span>
+								<span class="target">RectSelector</span>
 							</li>
 						</ul>
 					</li>
@@ -95,41 +105,42 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_rectangleselector_.rectangleselector.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_rectselector_.rectselector.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#area" class="tsd-kind-icon">area</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectangleselector_.rectangleselector.html#height" class="tsd-kind-icon">height</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#lasso" class="tsd-kind-icon">lasso</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectangleselector_.rectangleselector.html#left" class="tsd-kind-icon">left</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#options" class="tsd-kind-icon">options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#origin" class="tsd-kind-icon">origin</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#pendingrenderid" class="tsd-kind-icon">pending<wbr>RenderID</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#preserveselection" class="tsd-kind-icon">preserve<wbr>Selection</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectangleselector_.rectangleselector.html#top" class="tsd-kind-icon">top</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectangleselector_.rectangleselector.html#width" class="tsd-kind-icon">width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#area" class="tsd-kind-icon">area</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectselector_.rectselector.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#lasso" class="tsd-kind-icon">lasso</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectselector_.rectselector.html#left" class="tsd-kind-icon">left</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#origin" class="tsd-kind-icon">origin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#pendingrenderid" class="tsd-kind-icon">pending<wbr>RenderID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#preservedselection" class="tsd-kind-icon">preserved<wbr>Selection</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectselector_.rectselector.html#top" class="tsd-kind-icon">top</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_rectselector_.rectselector.html#width" class="tsd-kind-icon">width</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#cancelrender" class="tsd-kind-icon">cancel<wbr>Render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_rectangleselector_.rectangleselector.html#connect" class="tsd-kind-icon">connect</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#createlassoelement" class="tsd-kind-icon">create<wbr>Lasso<wbr>Element</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#edgeshorterthan" class="tsd-kind-icon">edge<wbr>Shorter<wbr>Than</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_rectangleselector_.rectangleselector.html#intersects" class="tsd-kind-icon">intersects</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#onmousedown" class="tsd-kind-icon">on<wbr>Mouse<wbr>Down</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#onmousemove" class="tsd-kind-icon">on<wbr>Mouse<wbr>Move</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#onmouseup" class="tsd-kind-icon">on<wbr>Mouse<wbr>Up</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#render" class="tsd-kind-icon">render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#requestrender" class="tsd-kind-icon">request<wbr>Render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#setvisible" class="tsd-kind-icon">set<wbr>Visible</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#update" class="tsd-kind-icon">update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private"><a href="_rectangleselector_.rectangleselector.html#withscroll" class="tsd-kind-icon">with<wbr>Scroll</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_rectangleselector_.rectangleselector.html#from" class="tsd-kind-icon">from</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#cancelrender" class="tsd-kind-icon">cancel<wbr>Render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_rectselector_.rectselector.html#connect" class="tsd-kind-icon">connect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#createlassoelement" class="tsd-kind-icon">create<wbr>Lasso<wbr>Element</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#doesedgepassthreshold" class="tsd-kind-icon">does<wbr>Edge<wbr>Pass<wbr>Threshold</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#getpagecoordinates" class="tsd-kind-icon">get<wbr>Page<wbr>Coordinates</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_rectselector_.rectselector.html#intersects" class="tsd-kind-icon">intersects</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#onmousedown" class="tsd-kind-icon">on<wbr>Mouse<wbr>Down</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#onmousemove" class="tsd-kind-icon">on<wbr>Mouse<wbr>Move</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#onmouseup" class="tsd-kind-icon">on<wbr>Mouse<wbr>Up</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#render" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#requestrender" class="tsd-kind-icon">request<wbr>Render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#setvisible" class="tsd-kind-icon">set<wbr>Visible</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private"><a href="_rectselector_.rectselector.html#translatebyscroll" class="tsd-kind-icon">translate<wbr>ByScroll</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_rectselector_.rectselector.html#update" class="tsd-kind-icon">update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_rectselector_.rectselector.html#from" class="tsd-kind-icon">from</a></li>
 							</ul>
 						</section>
 					</div>
@@ -141,23 +152,23 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Rectangle<wbr>Selector<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_rectangleselector_.rectangleoptions.html" class="tsd-signature-type">RectangleOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_rectangleselector_.rectangleselector.html" class="tsd-signature-type">RectangleSelector</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rect<wbr>Selector<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_rectselector_.rectselectoroptions.html" class="tsd-signature-type">RectSelectorOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_rectselector_.rectselector.html" class="tsd-signature-type">RectSelector</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#constructor">constructor</a></p>
+								<p>Overrides <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in RectangleSelector.ts:29</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L62">RectSelector.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_rectangleselector_.rectangleoptions.html" class="tsd-signature-type">RectangleOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_rectselector_.rectselectoroptions.html" class="tsd-signature-type">RectSelectorOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_rectangleselector_.rectangleselector.html" class="tsd-signature-type">RectangleSelector</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_rectselector_.rectselector.html" class="tsd-signature-type">RectSelector</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -170,7 +181,7 @@
 					<div class="tsd-signature tsd-kind-icon">area<span class="tsd-signature-symbol">:</span> <a href="_area_.area.html" class="tsd-signature-type">Area</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in RectangleSelector.ts:24</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L57">RectSelector.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,14 +190,14 @@
 					<h3>height</h3>
 					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#height">height</a></p>
+						<p>Inherited from <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#height">height</a></p>
 						<ul>
-							<li>Defined in Bound.ts:19</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Rect.ts#L21">Rect.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The height of the boundary.</p>
+							<p>The height of the rectangle.</p>
 						</div>
 					</div>
 				</section>
@@ -196,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">lasso<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in RectangleSelector.ts:25</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L58">RectSelector.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -205,34 +216,34 @@
 					<h3>left</h3>
 					<div class="tsd-signature tsd-kind-icon">left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#left">left</a></p>
+						<p>Inherited from <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#left">left</a></p>
 						<ul>
-							<li>Defined in Bound.ts:19</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Rect.ts#L21">Rect.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The X coordinate of the left side of the boundary.</p>
+							<p>The X coordinate of the left side of the rectangle.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="options" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_rectangleselector_.rectangleoptions.html" class="tsd-signature-type">RectangleOptions</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_rectselector_.rectselectoroptions.html" class="tsd-signature-type">RectSelectorOptions</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in RectangleSelector.ts:31</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L64">RectSelector.ts:64</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="origin" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> origin</h3>
-					<div class="tsd-signature tsd-kind-icon">origin<span class="tsd-signature-symbol">:</span> <a href="_rectangleselector_.offset.html" class="tsd-signature-type">Offset</a></div>
+					<div class="tsd-signature tsd-kind-icon">origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_rectselector_.offset.html" class="tsd-signature-type">Offset</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in RectangleSelector.ts:27</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L60">RectSelector.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -242,17 +253,17 @@
 					<div class="tsd-signature tsd-kind-icon">pending<wbr>RenderID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in RectangleSelector.ts:28</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L61">RectSelector.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="preserveselection" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> preserve<wbr>Selection</h3>
-					<div class="tsd-signature tsd-kind-icon">preserve<wbr>Selection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="preservedselection" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> preserved<wbr>Selection</h3>
+					<div class="tsd-signature tsd-kind-icon">preserved<wbr>Selection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in RectangleSelector.ts:29</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L62">RectSelector.ts:62</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -261,14 +272,14 @@
 					<h3>top</h3>
 					<div class="tsd-signature tsd-kind-icon">top<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#top">top</a></p>
+						<p>Inherited from <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#top">top</a></p>
 						<ul>
-							<li>Defined in Bound.ts:19</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Rect.ts#L21">Rect.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The Y coordinate of the top of the boundary.</p>
+							<p>The Y coordinate of the top of the rectangle.</p>
 						</div>
 					</div>
 				</section>
@@ -277,14 +288,14 @@
 					<h3>width</h3>
 					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#width">width</a></p>
+						<p>Inherited from <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#width">width</a></p>
 						<ul>
-							<li>Defined in Bound.ts:19</li>
+							<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Rect.ts#L21">Rect.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The width of the boundary.</p>
+							<p>The width of the rectangle.</p>
 						</div>
 					</div>
 				</section>
@@ -301,7 +312,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:95</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L132">RectSelector.ts:132</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -319,7 +330,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_selector_.selector.html">Selector</a>.<a href="../interfaces/_selector_.selector.html#connect">connect</a></p>
 								<ul>
-									<li>Defined in RectangleSelector.ts:36</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L69">RectSelector.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -342,7 +353,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:128</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L169">RectSelector.ts:169</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLDivElement</span></h4>
@@ -350,25 +361,50 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="edgeshorterthan" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> edge<wbr>Shorter<wbr>Than</h3>
+					<a name="doesedgepassthreshold" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> does<wbr>Edge<wbr>Pass<wbr>Threshold</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">edge<wbr>Shorter<wbr>Than<span class="tsd-signature-symbol">(</span>length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">does<wbr>Edge<wbr>Pass<wbr>Threshold<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:116</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L153">RectSelector.ts:153</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getpagecoordinates" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Page<wbr>Coordinates</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Page<wbr>Coordinates<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L165">RectSelector.ts:165</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>length: <span class="tsd-signature-type">number</span></h5>
+									<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>left<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>top<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -376,25 +412,25 @@
 					<a name="intersects" class="tsd-anchor"></a>
 					<h3>intersects</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">intersects<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="../modules/_bound_.html#rectlike" class="tsd-signature-type">RectLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersects<span class="tsd-signature-symbol">(</span>r<span class="tsd-signature-symbol">: </span><a href="../modules/_rect_.html#rectlike" class="tsd-signature-type">RectLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#intersects">intersects</a></p>
+								<p>Inherited from <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#intersects">intersects</a></p>
 								<ul>
-									<li>Defined in Bound.ts:34</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Rect.ts#L38">Rect.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Determines whether this boundary does intersect other rect-like object.</p>
+									<p>Determines whether this rectangle intersects other rect-like object.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>other: <a href="../modules/_bound_.html#rectlike" class="tsd-signature-type">RectLike</a></h5>
+									<h5>r: <a href="../modules/_rect_.html#rectlike" class="tsd-signature-type">RectLike</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The specified rect-like object.</p>
 									</div>
@@ -414,7 +450,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:42</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L75">RectSelector.ts:75</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -431,19 +467,19 @@
 					<a name="onmousemove" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Mouse<wbr>Move</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Mouse<wbr>Move<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Mouse<wbr>Move<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:52</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L88">RectSelector.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">any</span></h5>
+									<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -460,7 +496,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:70</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L106">RectSelector.ts:106</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -477,7 +513,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:102</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L139">RectSelector.ts:139</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -494,7 +530,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:89</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L126">RectSelector.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -511,7 +547,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:111</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L148">RectSelector.ts:148</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -527,40 +563,23 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="update" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in RectangleSelector.ts:81</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
-					<a name="withscroll" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> with<wbr>Scroll</h3>
+					<a name="translatebyscroll" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> translate<wbr>ByScroll</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">with<wbr>Scroll&lt;T&gt;<span class="tsd-signature-symbol">(</span>offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+						<li class="tsd-signature tsd-kind-icon">translate<wbr>ByScroll&lt;T&gt;<span class="tsd-signature-symbol">(</span>offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in RectangleSelector.ts:120</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L157">RectSelector.ts:157</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>T<span class="tsd-signature-symbol">: </span><a href="_rectangleselector_.offset.html" class="tsd-signature-type">Offset</a><span class="tsd-signature-symbol"> | </span><a href="_bound_.bound.html" class="tsd-signature-type">Bound</a></h4>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/_rectselector_.offset.html" class="tsd-signature-type">Offset</a></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -573,37 +592,57 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="from" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> from</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">from<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="../modules/_bound_.html#rectlike" class="tsd-signature-type">RectLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_bound_.bound.html" class="tsd-signature-type">Bound</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="update" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_bound_.bound.html">Bound</a>.<a href="_bound_.bound.html#from">from</a></p>
 								<ul>
-									<li>Defined in Bound.ts:26</li>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/RectSelector.ts#L117">RectSelector.ts:117</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a name="from" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<span class="tsd-signature-symbol">(</span>r<span class="tsd-signature-symbol">: </span><a href="../modules/_rect_.html#rectlike" class="tsd-signature-type">RectLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_rect_.rect.html" class="tsd-signature-type">Rect</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_rect_.rect.html">Rect</a>.<a href="_rect_.rect.html#from">from</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/gedas/selekter/blob/06f3c79/src/Rect.ts#L29">Rect.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Creates a boundary from existing rect-like object.</p>
+									<p>Creates a rectangle from existing rect-like object.</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><p><code>Bound.from(element.getBoundingClientRect())</code></p>
+									<dd><p><code>Rect.from(element.getBoundingClientRect())</code></p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>other: <a href="../modules/_bound_.html#rectlike" class="tsd-signature-type">RectLike</a></h5>
+									<h5>r: <a href="../modules/_rect_.html#rectlike" class="tsd-signature-type">RectLike</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Other rect-like object to create rectangle from.</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_bound_.bound.html" class="tsd-signature-type">Bound</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_rect_.rect.html" class="tsd-signature-type">Rect</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -619,16 +658,13 @@
 						<a href="../modules/_area_.html">"<wbr>Area"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_bound_.html">"<wbr>Bound"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_mouseselector_.html">"<wbr>Mouse<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_observableset_.html">"<wbr>Observable<wbr>Set"</a>
+						<a href="../modules/_rect_.html">"<wbr>Rect"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_rectangleselector_.html">"<wbr>Rectangle<wbr>Selector"</a>
+						<a href="../modules/_rectselector_.html">"<wbr>Rect<wbr>Selector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_selection_.html">"<wbr>Selection"</a>
@@ -646,98 +682,101 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_rectangleselector_.offset.html" class="tsd-kind-icon">Offset</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_rectangleselector_.rectangleselector.html" class="tsd-kind-icon">Rectangle<wbr>Selector</a>
+						<a href="_rectselector_.rectselector.html" class="tsd-kind-icon">Rect<wbr>Selector</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="_rectangleselector_.rectangleselector.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_rectselector_.rectselector.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#area" class="tsd-kind-icon">area</a>
+								<a href="_rectselector_.rectselector.html#area" class="tsd-kind-icon">area</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_rectangleselector_.rectangleselector.html#height" class="tsd-kind-icon">height</a>
+								<a href="_rectselector_.rectselector.html#height" class="tsd-kind-icon">height</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#lasso" class="tsd-kind-icon">lasso</a>
+								<a href="_rectselector_.rectselector.html#lasso" class="tsd-kind-icon">lasso</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_rectangleselector_.rectangleselector.html#left" class="tsd-kind-icon">left</a>
+								<a href="_rectselector_.rectselector.html#left" class="tsd-kind-icon">left</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#options" class="tsd-kind-icon">options</a>
+								<a href="_rectselector_.rectselector.html#options" class="tsd-kind-icon">options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#origin" class="tsd-kind-icon">origin</a>
+								<a href="_rectselector_.rectselector.html#origin" class="tsd-kind-icon">origin</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#pendingrenderid" class="tsd-kind-icon">pending<wbr>RenderID</a>
+								<a href="_rectselector_.rectselector.html#pendingrenderid" class="tsd-kind-icon">pending<wbr>RenderID</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#preserveselection" class="tsd-kind-icon">preserve<wbr>Selection</a>
+								<a href="_rectselector_.rectselector.html#preservedselection" class="tsd-kind-icon">preserved<wbr>Selection</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_rectangleselector_.rectangleselector.html#top" class="tsd-kind-icon">top</a>
+								<a href="_rectselector_.rectselector.html#top" class="tsd-kind-icon">top</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_rectangleselector_.rectangleselector.html#width" class="tsd-kind-icon">width</a>
+								<a href="_rectselector_.rectselector.html#width" class="tsd-kind-icon">width</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#cancelrender" class="tsd-kind-icon">cancel<wbr>Render</a>
+								<a href="_rectselector_.rectselector.html#cancelrender" class="tsd-kind-icon">cancel<wbr>Render</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_rectangleselector_.rectangleselector.html#connect" class="tsd-kind-icon">connect</a>
+								<a href="_rectselector_.rectselector.html#connect" class="tsd-kind-icon">connect</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#createlassoelement" class="tsd-kind-icon">create<wbr>Lasso<wbr>Element</a>
+								<a href="_rectselector_.rectselector.html#createlassoelement" class="tsd-kind-icon">create<wbr>Lasso<wbr>Element</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#edgeshorterthan" class="tsd-kind-icon">edge<wbr>Shorter<wbr>Than</a>
+								<a href="_rectselector_.rectselector.html#doesedgepassthreshold" class="tsd-kind-icon">does<wbr>Edge<wbr>Pass<wbr>Threshold</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_rectselector_.rectselector.html#getpagecoordinates" class="tsd-kind-icon">get<wbr>Page<wbr>Coordinates</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_rectangleselector_.rectangleselector.html#intersects" class="tsd-kind-icon">intersects</a>
+								<a href="_rectselector_.rectselector.html#intersects" class="tsd-kind-icon">intersects</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#onmousedown" class="tsd-kind-icon">on<wbr>Mouse<wbr>Down</a>
+								<a href="_rectselector_.rectselector.html#onmousedown" class="tsd-kind-icon">on<wbr>Mouse<wbr>Down</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#onmousemove" class="tsd-kind-icon">on<wbr>Mouse<wbr>Move</a>
+								<a href="_rectselector_.rectselector.html#onmousemove" class="tsd-kind-icon">on<wbr>Mouse<wbr>Move</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#onmouseup" class="tsd-kind-icon">on<wbr>Mouse<wbr>Up</a>
+								<a href="_rectselector_.rectselector.html#onmouseup" class="tsd-kind-icon">on<wbr>Mouse<wbr>Up</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#render" class="tsd-kind-icon">render</a>
+								<a href="_rectselector_.rectselector.html#render" class="tsd-kind-icon">render</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#requestrender" class="tsd-kind-icon">request<wbr>Render</a>
+								<a href="_rectselector_.rectselector.html#requestrender" class="tsd-kind-icon">request<wbr>Render</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#setvisible" class="tsd-kind-icon">set<wbr>Visible</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#update" class="tsd-kind-icon">update</a>
+								<a href="_rectselector_.rectselector.html#setvisible" class="tsd-kind-icon">set<wbr>Visible</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
-								<a href="_rectangleselector_.rectangleselector.html#withscroll" class="tsd-kind-icon">with<wbr>Scroll</a>
+								<a href="_rectselector_.rectselector.html#translatebyscroll" class="tsd-kind-icon">translate<wbr>ByScroll</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_rectselector_.rectselector.html#update" class="tsd-kind-icon">update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="_rectangleselector_.rectangleselector.html#from" class="tsd-kind-icon">from</a>
+								<a href="_rectselector_.rectselector.html#from" class="tsd-kind-icon">from</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../interfaces/_rectselector_.offset.html" class="tsd-kind-icon">Offset</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_rectangleselector_.rectangleoptions.html" class="tsd-kind-icon">Rectangle<wbr>Options</a>
+						<a href="../interfaces/_rectselector_.rectselectoroptions.html" class="tsd-kind-icon">Rect<wbr>Selector<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_rectangleselector_.html#defaults" class="tsd-kind-icon">defaults</a>
+						<a href="../modules/_rectselector_.html#defaults" class="tsd-kind-icon">defaults</a>
 					</li>
 				</ul>
 			</nav>
