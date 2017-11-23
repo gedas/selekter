@@ -1,6 +1,6 @@
 # selekter
 
-![selekter](https://user-images.githubusercontent.com/136955/33146647-b38f3268-cfcd-11e7-811d-d00d208eb543.gif)
+![selekter](https://user-images.githubusercontent.com/136955/33159206-747a18a8-d019-11e7-9626-9865820ecff2.jpg)
 
 ## About
 
