@@ -1,4 +1,7 @@
 # selekter
+[![license](https://img.shields.io/github/license/gzukas/selekter.svg?style=flat-square)](https://github.com/gzukas/selekter/blob/master/LICENSE)
+![](http://img.badgesize.io/gzukas/selekter/master/dist/selekter.js?style=flat-square)
+![](http://img.badgesize.io/gzukas/selekter/master/dist/selekter.js?compression=gzip&label=gzipped&style=flat-square)
 
 ![selekter](https://user-images.githubusercontent.com/136955/33159206-747a18a8-d019-11e7-9626-9865820ecff2.jpg)
 
