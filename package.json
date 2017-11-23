@@ -4,10 +4,11 @@
   "description": "",
   "main": "dist/selekter.js",
   "module": "dist/selekter.esm.js",
+  "types": "dist/selekter.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && rollup -c",
-    "start": "npm run clean && rollup -cw"
+    "build": "rimraf dist && rollup -c",
+    "start": "rimraf dist && rollup -cw",
+    "typings": "tsc -d && dts-bundle --name selekter --outputAsModuleFolder true --main dist/files/**/*.d.ts --out ../selekter.d.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/gzukas/selekter",
   "devDependencies": {
+    "dts-bundle": "^0.7.3",
     "rimraf": "^2.6.2",
     "rollup": "^0.51.8",
     "rollup-plugin-livereload": "^0.6.0",
@@ -26,7 +28,6 @@
     "rollup-plugin-typescript2": "^0.8.1",
     "rollup-plugin-uglify": "^2.0.1",
     "tslib": "^1.8.0",
-    "typedoc": "^0.9.0",
     "typescript": "^2.6.1",
     "uglify-es": "^3.1.10"
   }
