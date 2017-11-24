@@ -1,5 +1,6 @@
 # selekter
 
+[![npm](https://img.shields.io/npm/v/selekter.svg?style=flat-square)](https://www.npmjs.com/package/selekter)
 [![dependencies](https://david-dm.org/gzukas/selekter.svg?style=flat-square)](https://david-dm.org/gzukas/selekter)
 [![license](https://img.shields.io/github/license/gzukas/selekter.svg?style=flat-square)](https://github.com/gzukas/selekter/blob/master/LICENSE)
 ![size](http://img.badgesize.io/gzukas/selekter/master/dist/selekter.js?style=flat-square)
