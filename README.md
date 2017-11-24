@@ -42,7 +42,7 @@ This will make all `.selekter-selectable` inside `.area` selectable. The `.selek
 import { SelectionEvent, SELECTION_EVENT } from 'selekter';
 
 root.addEventListener(SELECTION_EVENT, (event: SelectionEvent) =>
-  console.log(`${event.target}` - ${event.detail.selected}));
+  console.log(`${event.target} was ${event.detail.selected}`));
 ```
 
 If default selection tool options are unfavorable or custom selectors are needed, pass them to `Area` constructor as a third parameter. For example:
