@@ -42,7 +42,7 @@ This will make all `.selekter-selectable` inside `.area` selectable. The `.selek
 import { SelectionEvent, SELECTION_EVENT } from 'selekter';
 
 root.addEventListener(SELECTION_EVENT, (event: SelectionEvent) =>
-  console.log(`${event.target}` was ${event.detail.selected ? 'selected' : 'deselected'}));
+  console.log(`${event.target}` - ${event.detail.selected}));
 ```
 
 If default selection tool options are unfavorable or custom selectors are needed, pass them to `Area` constructor as a third parameter. For example:
@@ -50,7 +50,10 @@ If default selection tool options are unfavorable or custom selectors are needed
 ```ts
 import { defaultSelectors, RectSelector } from 'selekter';
 
-new Area(root, { /* options */ }, [ ...defaultSelectors, new RectSelector({ threshold: 20 }) ]);  
+new Area(root, { /* options */ }, [
+  ...defaultSelectors,
+  new RectSelector({ threshold: 20 })
+]);  
 ```
 
 This will result in rectangular selector with new threshold taking precedence over default selector.
