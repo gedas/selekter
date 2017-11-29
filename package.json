@@ -1,6 +1,6 @@
 {
   "name": "selekter",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Selection management model for DOM elements",
   "main": "dist/selekter.js",
   "module": "dist/selekter.esm.js",
