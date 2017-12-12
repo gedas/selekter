@@ -1,5 +1,5 @@
 import { Selection, SelectionEvent, SELECTION_EVENT } from './Selection';
-import { Selector, SelectorDisconnector } from './Selector';
+import { Selector, Destroy } from './Selector';
 import defaultSelectors from './defaultSelectors';
 
 export interface AreaOptions {
@@ -39,9 +39,9 @@ const defaults: AreaOptions = {
 export class Area {
   private selection = new Selection();
   private selectables: Set<Element>;
-  private rootDirty = true;
-  private selectorDisconnectors: SelectorDisconnector[];
+  private selectorDestroyers: Destroy[];
   private observer: MutationObserver;
+  private rootDirty = true;
   
   private onSelection = (event: SelectionEvent) => {
     this.root.classList.toggle(this.options.selectionClass, this.selection.size > 0);
@@ -64,11 +64,14 @@ export class Area {
    *   ]
    *   ~~~
    */
-  constructor(public root: Element, public options?: Partial<AreaOptions>, selectors = defaultSelectors) {
+  constructor(public root: HTMLElement, public options?: Partial<AreaOptions>, selectors = defaultSelectors) {
     this.options = { ...defaults, ...options };
+    this.selectorDestroyers = this.lastUniqueByConstructor(selectors).map(s => s.connect(this));
 
-    this.observer = this.observeDescendants(root, () => this.rootDirty = true);
-    this.selectorDisconnectors = this.lastUniqueByConstructor(selectors).map(s => s.connect(this));
+    if (MutationObserver) {
+      this.observer = new MutationObserver(() => this.rootDirty = true);
+      this.observer.observe(root, { childList: true, subtree: true });
+    }
 
     root.addEventListener(SELECTION_EVENT, this.onSelection);
   }
@@ -77,26 +80,27 @@ export class Area {
    * Returns the current selection.
    * 
    * Modifying this selection will result in selection events being dispatched.
-   * Unlike `getSelectables()`, selection is updated and not recreated when
-   * `root` subtree changes. Therefore, it is guaranteed that the same
-   * `Selection` instance will be referenced.
+   * If `MutationObserver` is supported, then selection is updated only when
+   * `root` subtree changes. The update includes removing selected elements
+   * that are no longer in `root` subtree.
    */
-  getSelection() {
+  getSelection(): Selection {
     if (this.rootDirty) {
       this.selection.intersect(this.getSelectables());
-      this.rootDirty = false;
+      this.rootDirty = !this.observer;
     }
     return this.selection;
   }
 
   /**
    * Returns a set of selectable elements queried by `selectable` option.
-   * Set is recreated each time `root` subtree changes.
+   * If `MutationObserver` is supported, then set is recreated only when `root`
+   * subtree changes.
    */
   getSelectables() {
     if (this.rootDirty) {
       this.selectables = new Set([...this.root.querySelectorAll(this.options.selectable)]);
-      this.rootDirty = false;
+      this.rootDirty = !this.observer;
     }
     return this.selectables;
   }
@@ -106,15 +110,9 @@ export class Area {
    * No option to recover other than creating new `Area`.
    */
   destroy() {
-    this.observer.disconnect();
-    this.selectorDisconnectors.forEach(disconnect => disconnect());
+    this.observer && this.observer.disconnect();
+    this.selectorDestroyers.forEach(destroy => destroy());
     this.root.removeEventListener(SELECTION_EVENT, this.onSelection);
-  }
-
-  private observeDescendants(root: Element, callback: MutationCallback) {
-    let observer = new MutationObserver(callback);
-    observer.observe(root, { childList: true, subtree: true });
-    return observer;
   }
 
   private lastUniqueByConstructor<T>(array: T[]): T[] {

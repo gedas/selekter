@@ -26,7 +26,7 @@ export interface AreaOptions {
     * Represents an area containing selectable elements.
     */
 export class Area {
-        root: Element;
+        root: HTMLElement;
         options: Partial<AreaOptions>;
         /**
             * Creates an `Area`.
@@ -44,19 +44,20 @@ export class Area {
             *   ]
             *   ~~~
             */
-        constructor(root: Element, options?: Partial<AreaOptions>, selectors?: Selector[]);
+        constructor(root: HTMLElement, options?: Partial<AreaOptions>, selectors?: Selector[]);
         /**
             * Returns the current selection.
             *
             * Modifying this selection will result in selection events being dispatched.
-            * Unlike `getSelectables()`, selection is updated and not recreated when
-            * `root` subtree changes. Therefore, it is guaranteed that the same
-            * `Selection` instance will be referenced.
+            * If `MutationObserver` is supported, then selection is updated only when
+            * `root` subtree changes. The update includes removing selected elements
+            * that are no longer in `root` subtree.
             */
         getSelection(): Selection;
         /**
             * Returns a set of selectable elements queried by `selectable` option.
-            * Set is recreated each time `root` subtree changes.
+            * If `MutationObserver` is supported, then set is recreated only when `root`
+            * subtree changes.
             */
         getSelectables(): Set<Element>;
         /**
@@ -72,6 +73,8 @@ export class Area {
   */
 const defaultSelectors: Selector[];
 export default defaultSelectors;
+
+import './selekter.css';
 
 export interface MouseSelectorOptions {
         /**
@@ -90,7 +93,7 @@ export interface MouseSelectorOptions {
     */
 export class MouseSelector implements Selector {
         constructor(options?: Partial<MouseSelectorOptions>);
-        connect(area: Area): SelectorDisconnector;
+        connect(area: Area): Destroy;
 }
 
 /**
@@ -136,7 +139,6 @@ export class Rect {
         intersects(r: RectLike): boolean;
 }
 
-import './RectSelector.css';
 export interface RectSelectorOptions {
         /**
             * A style class to be added to lasso element.
@@ -172,7 +174,7 @@ export interface RectSelectorOptions {
     */
 export class RectSelector extends Rect implements Selector {
         constructor(options?: Partial<RectSelectorOptions>);
-        connect(area: Area): SelectorDisconnector;
+        connect(area: Area): Destroy;
 }
 
 /**
@@ -220,13 +222,13 @@ export class Selection {
             *
             * @param other The set being intersected with this selection.
             */
-        intersect(other: Set<Element>): void;
+        intersect(other: Set<Element>): this;
 }
 
 /**
-    * An alias for a function that disconnects the selector.
+    * An alias for a function that destroys the selector.
     */
-export type SelectorDisconnector = () => void;
+export type Destroy = () => void;
 /**
     * Provides the way of selecting elements within the area.
     */
@@ -239,8 +241,8 @@ export interface Selector {
             * function.
             *
             * @param area The area to register this selector to.
-            * @returns A function that disconnects registered selector.
+            * @returns A function that destroys registered selector.
             */
-        connect(area: Area): SelectorDisconnector;
+        connect(area: Area): Destroy;
 }
 

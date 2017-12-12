@@ -2,21 +2,20 @@
 
   function createCard() {
     var div = document.createElement('div');
-    div.classList.add('card');
-    div.innerHTML =
-      '<div class="card-content">' +
-      '  <button class="selekter-tick"></button>' +
-      '</div>';
+    div.classList.add('selekter-selectable');
+    div.innerHTML = '<button class="selekter-tick"></button>';
     return div;
   }
 
   var root = document.querySelector('.area');
-  var rootContainer = root.querySelector('.area-container');
 
   for (var i = 0; i < 9; ++i) {
-    rootContainer.appendChild(createCard());
+    root.appendChild(createCard());
   }
 
-  new selekter.Area(root, { selectable: '.card' });
+  new selekter.Area(root, {}, [
+    ...selekter.defaultSelectors,
+    new selekter.RectSelector({ appendTo: root })
+  ]);
 
 })();

@@ -1,9 +1,9 @@
 import { Area } from './Area';
 
 /**
- * An alias for a function that disconnects the selector.
+ * An alias for a function that destroys the selector.
  */
-export type SelectorDisconnector = () => void;
+export type Destroy = () => void;
 
 /**
  * Provides the way of selecting elements within the area.
@@ -18,7 +18,7 @@ export interface Selector {
    * function.
    * 
    * @param area The area to register this selector to.
-   * @returns A function that disconnects registered selector.
+   * @returns A function that destroys registered selector.
    */
-  connect(area: Area): SelectorDisconnector;
+  connect(area: Area): Destroy;
 }

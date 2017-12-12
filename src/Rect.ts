@@ -41,4 +41,5 @@ export class Rect {
       && this.top <= r.top + r.height
       && r.top <= this.top + this.height;
   }
+
 }

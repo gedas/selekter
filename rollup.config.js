@@ -5,6 +5,8 @@ import livereload from 'rollup-plugin-livereload';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
 import postcss from 'rollup-plugin-postcss';
+import customProperties from 'postcss-custom-properties';
+import nested from 'postcss-nested';
 import pkg from './package.json';
 
 const dev = !!process.env.ROLLUP_WATCH;
@@ -12,7 +14,7 @@ const dev = !!process.env.ROLLUP_WATCH;
 let plugins = [
   typescript(),
   resolve(),
-  postcss({ extract: 'dist/selekter.css' })
+  postcss({ extract: 'dist/selekter.css', plugins: [nested(), customProperties()] })
 ];
 
 if (dev) {

@@ -1,5 +1,5 @@
 import { Area } from './Area';
-import { Selector, SelectorDisconnector } from './Selector';
+import { Selector, Destroy } from './Selector';
 
 const matches = Element.prototype.matches || Element.prototype.msMatchesSelector;
 
@@ -30,7 +30,7 @@ export class MouseSelector implements Selector {
     this.options = { ...defaults, ...options };
   }
 
-  connect(area: Area): SelectorDisconnector {
+  connect(area: Area): Destroy {
     this.area = area;
     this.area.root.addEventListener('click', this.onClick);
     return () => this.area.root.removeEventListener('click', this.onClick);

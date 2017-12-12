@@ -85,6 +85,7 @@ export class Selection {
    */
   intersect(other: Set<Element>) {
     this.elements.forEach(x => !other.has(x) && this.delete(x));
+    return this;
   }
 
   private notify(element: Element, selected: boolean) {
