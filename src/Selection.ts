@@ -20,7 +20,7 @@ export class Selection {
 
   private elements: Set<Element>;
 
-  constructor(elements?: Iterable<Element>) {
+  constructor(elements?: Element[]) {
     this.elements = new Set<Element>(elements);
   }
 

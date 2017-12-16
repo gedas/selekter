@@ -23,6 +23,11 @@ export interface AreaOptions {
         selectedClass: string;
 }
 /**
+    * An array of default selectors.
+    * Intended to be used when specifying selectors for new `Area`.
+    */
+export const DEFAULT_SELECTORS: Selector[];
+/**
     * Represents an area containing selectable elements.
     */
 export class Area {
@@ -39,7 +44,7 @@ export class Area {
             *   of default selectors or add new ones.
             *   ~~~
             *   [
-            *     ...defaultSelectors,
+            *     ...DEFAULT_SELECTORS,
             *     new RectSelector({ threshold: 20 }), // override default
             *   ]
             *   ~~~
@@ -66,13 +71,6 @@ export class Area {
             */
         destroy(): void;
 }
-
-/**
-  * An array of default selectors.
-  * Intended to be used when specifying selectors for new `Area`.
-  */
-const defaultSelectors: Selector[];
-export default defaultSelectors;
 
 import './selekter.css';
 
@@ -153,7 +151,8 @@ export interface RectSelectorOptions {
             */
         threshold: number;
         /**
-            * The element to append lasso to. Defaults to document body.
+            * The element to append lasso to. If not specified, then lasso will be
+            * appended to area `root` element.
             */
         appendTo: Element;
         /**
@@ -196,7 +195,7 @@ export interface SelectionEvent extends CustomEvent {
     * being added or removed, i.e, when selection size changes.
     */
 export class Selection {
-        constructor(elements?: Iterable<Element>);
+        constructor(elements?: Element[]);
         readonly size: number;
         values(): IterableIterator<Element>;
         add(element: Element): this;

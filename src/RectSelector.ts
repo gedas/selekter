@@ -18,7 +18,8 @@ export interface RectSelectorOptions {
   threshold: number;
 
   /**
-   * The element to append lasso to. Defaults to document body.
+   * The element to append lasso to. If not specified, then lasso will be
+   * appended to area `root` element.
    */
   appendTo: Element;
 
@@ -33,10 +34,9 @@ export interface RectSelectorOptions {
   boundary(element: Element): RectLike;
 }
 
-const defaults: RectSelectorOptions = {
+const defaults: Partial<RectSelectorOptions> = {
   lassoClass: 'selekter-lasso',
   threshold: 10,
-  appendTo: document.body,
   boundary: element => element.getBoundingClientRect()
 }
 
@@ -89,7 +89,7 @@ export class RectSelector extends Rect implements Selector {
 
     if (this.setVisible(this.lasso, this.doesEdgePassThreshold())) {
       if (!this.lasso) {
-        this.lasso = this.options.appendTo.appendChild(this.createLassoElement());
+        this.lasso = (this.options.appendTo || this.area.root).appendChild(this.createLassoElement());
       }
       this.requestRender();
     }

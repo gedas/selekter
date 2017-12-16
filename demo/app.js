@@ -13,9 +13,6 @@
     root.appendChild(createCard());
   }
 
-  new selekter.Area(root, {}, [
-    ...selekter.defaultSelectors,
-    new selekter.RectSelector({ appendTo: root })
-  ]);
+  new selekter.Area(root);
 
 })();

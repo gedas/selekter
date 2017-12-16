@@ -1,6 +1,7 @@
 import { Selection, SelectionEvent, SELECTION_EVENT } from './Selection';
 import { Selector, Destroy } from './Selector';
-import defaultSelectors from './defaultSelectors';
+import { MouseSelector } from './MouseSelector';
+import { RectSelector } from './RectSelector';
 
 export interface AreaOptions {
   /**
@@ -26,6 +27,15 @@ export interface AreaOptions {
    */
   selectedClass: string;
 }
+
+/**
+ * An array of default selectors.
+ * Intended to be used when specifying selectors for new `Area`.
+ */
+export const DEFAULT_SELECTORS: Selector[] = [
+  new MouseSelector(),
+  new RectSelector()
+];
 
 const defaults: AreaOptions = {
   selectable: '.selekter-selectable',
@@ -59,12 +69,12 @@ export class Area {
    *   of default selectors or add new ones.
    *   ~~~
    *   [
-   *     ...defaultSelectors,
+   *     ...DEFAULT_SELECTORS,
    *     new RectSelector({ threshold: 20 }), // override default
    *   ]
    *   ~~~
    */
-  constructor(public root: HTMLElement, public options?: Partial<AreaOptions>, selectors = defaultSelectors) {
+  constructor(public root: HTMLElement, public options?: Partial<AreaOptions>, selectors = DEFAULT_SELECTORS) {
     this.options = { ...defaults, ...options };
     this.selectorDestroyers = this.lastUniqueByConstructor(selectors).map(s => s.connect(this));
 
@@ -99,7 +109,7 @@ export class Area {
    */
   getSelectables() {
     if (this.rootDirty) {
-      this.selectables = new Set([...this.root.querySelectorAll(this.options.selectable)]);
+      this.selectables = new Set([...Array.prototype.slice.call(this.root.querySelectorAll(this.options.selectable))]);
       this.rootDirty = !this.observer;
     }
     return this.selectables;

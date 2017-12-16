@@ -20,9 +20,9 @@ $ npm install selekter --save
 
 Selekter depends on the following modern JavaScript features:
 * [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)  (with [`values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) and `new Set(iterable)` constructor)
-* [`MutationObserver`](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
 * [`Element.closest`](https://developer.mozilla.org/en-US/docs/Web/API/Element/closest)
 * [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) (constructor)
+* [`MutationObserver`](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) (optional, but recommended)
 
 Please use polyfills if one of those is not supported by your browser.
 
@@ -49,10 +49,10 @@ root.addEventListener(SELECTION_EVENT, (event: SelectionEvent) =>
 If default selection tool options are unfavorable or custom selectors are needed, pass them to `Area` constructor as a third parameter. For example:
 
 ```ts
-import { defaultSelectors, RectSelector } from 'selekter';
+import { DEFAULT_SELECTORS, RectSelector } from 'selekter';
 
 new Area(root, { /* options */ }, [
-  ...defaultSelectors,
+  ...DEFAULT_SELECTORS,
   new RectSelector({ threshold: 20 })
 ]);  
 ```
