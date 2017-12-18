@@ -32,7 +32,7 @@ export class MouseSelector implements Selector {
 
   connect(area: Area): Destroy {
     this.area = area;
-    this.area.root.addEventListener('click', this.onClick);
+    this.area.root.addEventListener('click', this.onClick, true);
     return () => this.area.root.removeEventListener('click', this.onClick);
   }
 
@@ -40,8 +40,9 @@ export class MouseSelector implements Selector {
     let selectable = (event.target as Element).closest(this.area.options.selectable);
     if (selectable) {
       let selection = this.area.getSelection();
-      if (selection.size > 0 || matches.call(event.target, this.options.tick)) {
+      if (selection.size || matches.call(event.target, this.options.tick)) {
         selection.toggle(selectable);
+        event.stopPropagation();
       }
     }
   }

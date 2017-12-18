@@ -50,7 +50,7 @@ export class RectSelector extends Rect implements Selector {
   private area: Area;
   private lasso: HTMLElement;
 
-  private origin: {left: number, top: number};
+  private origin: {top: number, left: number};
   private pendingRenderID: number;
   private preservedSelection: Set<Element>;
 
@@ -62,7 +62,7 @@ export class RectSelector extends Rect implements Selector {
   connect(area: Area): Destroy {
     this.area = area;
     document.addEventListener('mousedown', this.onMouseDown);
-    return () => document.removeEventListener('mousedown', this.onMouseDown);
+    return this.destroy;
   }
 
   private onMouseDown = (event: MouseEvent) => {
@@ -80,12 +80,12 @@ export class RectSelector extends Rect implements Selector {
 
   private onMouseMove = (event: MouseEvent) => {
     event.preventDefault();
-    let a = this.offset({ left: event.clientX, top: event.clientY }, this.area.root);
+    let mouse = this.offset({ left: event.clientX, top: event.clientY }, this.area.root);
 
-    this.top = Math.min(this.origin.top, a.top);
-    this.left = Math.min(this.origin.left, a.left);
-    this.width = Math.abs(this.origin.left - a.left);
-    this.height = Math.abs(this.origin.top - a.top);
+    this.top = Math.min(this.origin.top, mouse.top);
+    this.left = Math.min(this.origin.left, mouse.left);
+    this.width = Math.abs(this.origin.left - mouse.left);
+    this.height = Math.abs(this.origin.top - mouse.top);
 
     if (this.setVisible(this.lasso, this.doesEdgePassThreshold())) {
       if (!this.lasso) {
@@ -134,8 +134,8 @@ export class RectSelector extends Rect implements Selector {
 
   private render = () => {
     let style = this.lasso.style;
-    style.left = this.left + 'px';
     style.top = this.top + 'px';
+    style.left = this.left + 'px';
     style.width = this.width + 'px';
     style.height = this.height + 'px';
     this.pendingRenderID = 0;
@@ -150,16 +150,25 @@ export class RectSelector extends Rect implements Selector {
     return this.width >= this.options.threshold || this.height >= this.options.threshold;
   }
 
-  private offset<T extends {top: number, left: number}>(a: T, element: HTMLElement) {
-    a.top += element.scrollTop - element.offsetTop + (pageYOffset || document.documentElement.scrollTop),
-    a.left += element.scrollLeft - element.offsetLeft + (pageXOffset || document.documentElement.scrollLeft)
-    return a;
+  private offset<T extends {top: number, left: number}>(x: T, element: HTMLElement) {
+    x.top += element.scrollTop - element.offsetTop + (pageYOffset || document.documentElement.scrollTop),
+    x.left += element.scrollLeft - element.offsetLeft + (pageXOffset || document.documentElement.scrollLeft)
+    return x;
   }
 
   private createLassoElement() {
     let element = document.createElement('div');
     element.className = this.options.lassoClass;
     return element;
+  }
+  
+  private destroy = () => {
+    this.cancelRender();
+    if (this.lasso) {
+      this.lasso.parentElement.removeChild(this.lasso);
+      this.lasso = null;
+    }
+    document.removeEventListener('mousedown', this.onMouseDown);
   }
 
 }
