@@ -2,17 +2,19 @@
 
   function createCard() {
     var div = document.createElement('div');
-    div.classList.add('selekter-selectable');
+    div.className = 'selekter-selectable';
     div.innerHTML = '<button class="selekter-tick"></button>';
     return div;
   }
 
-  var root = document.querySelector('.area');
-
-  for (var i = 0; i < 9; ++i) {
-    root.appendChild(createCard());
+  var cards = document.createDocumentFragment();
+  for (var i = 0; i < 6; ++i) {
+    cards.appendChild(createCard());
   }
 
+  var root = document.querySelector('.area');
+  root.appendChild(cards);
+  
   new selekter.Area(root);
 
 })();
