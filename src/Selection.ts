@@ -1,10 +1,10 @@
 /**
- * The type of selection event.
+ * The type of selection change event.
  */
 export const SELECTION_EVENT = 'selection';
 
 /**
- * Represents a selection event published when element has been selected
+ * Represents a selection change event published when element has been selected
  * or deselected. 
  */
 export interface SelectionEvent extends CustomEvent {
@@ -20,18 +20,35 @@ export class Selection {
 
   private elements: Set<Element>;
 
+  /**
+   * Creates new `Selection`.
+   * 
+   * @param elements Elements to be added to the new `Selection`.
+   */
   constructor(elements?: Element[]) {
     this.elements = new Set<Element>(elements);
   }
 
+  /**
+   * Returns the number of selected elements.
+   */
   get size() {
     return this.elements.size;
   }
 
+  /**
+   * Returns a new `Iterator` object that contains selected elements.
+   */
   values() {
     return this.elements.values();
   }
 
+  /**
+   * Appends a new element.
+   * 
+   * @param element The element to be added.
+   * @returns This `Selection` object.
+   */
   add(element: Element) {
     let had = this.elements.has(element);
     this.elements.add(element);
@@ -41,14 +58,28 @@ export class Selection {
     return this;
   }
 
+  /**
+   * Removes the `element`.
+   * 
+   * @param element The element to be removed.
+   * @return The value that `has(element)` would have previously returned.
+   */
   delete(element: Element) {
     return this.elements.delete(element) && !this.notify(element, false);
   }
 
+  /**
+   * Determines whether an `element` is selected.
+   * 
+   * @param element The element to test for selection.
+   */
   has(element: Element) {
     return this.elements.has(element);
   }
 
+  /**
+   * Removes all elements.
+   */
   clear() {
     this.elements.forEach(x => this.delete(x));
   }
@@ -78,12 +109,12 @@ export class Selection {
   }
 
   /**
-   * Sets this selection to the intersection with `other` set. This selection
-   * will contain elements present in both collections.
+   * Sets this selection to the intersection with `other` set or selection.
+   * This selection will contain elements present in both collections.
    * 
-   * @param other The set being intersected with this selection.
+   * @param other The set or selection being intersected with this selection.
    */
-  intersect(other: Set<Element>) {
+  intersect(other: Set<Element> | Selection) {
     this.elements.forEach(x => !other.has(x) && this.delete(x));
     return this;
   }

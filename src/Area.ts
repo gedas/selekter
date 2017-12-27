@@ -89,10 +89,10 @@ export class Area {
   /**
    * Returns the current selection.
    * 
-   * Modifying this selection will result in selection events being dispatched.
-   * If `MutationObserver` is supported, then selection is updated only when
-   * `root` subtree changes. The update includes removing selected elements
-   * that are no longer in `root` subtree.
+   * Modifying this selection will result in selection change events being
+   * dispatched. If `MutationObserver` is supported, then selection is updated
+   * only when `root` subtree changes. The update includes removing from
+   * selection elements that are no longer in `root` subtree.
    */
   getSelection(): Selection {
     if (this.rootDirty) {
@@ -100,6 +100,19 @@ export class Area {
       this.rootDirty = !this.observer;
     }
     return this.selection;
+  }
+
+  /**
+   * Sets current selection.
+   * 
+   * Selection change events will be dispatched for each selectable that is not present
+   * in the new selection.
+   * 
+   * @param selection New selection.
+   */
+  setSelection(selection: Selection) {
+    this.selection.intersect(selection);
+    this.selection = selection;
   }
 
   /**

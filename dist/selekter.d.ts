@@ -55,10 +55,19 @@ export class Area {
             *
             * Modifying this selection will result in selection events being dispatched.
             * If `MutationObserver` is supported, then selection is updated only when
-            * `root` subtree changes. The update includes removing selected elements
-            * that are no longer in `root` subtree.
+            * `root` subtree changes. The update includes removing from selection
+            * elements that are no longer in `root` subtree.
             */
         getSelection(): Selection;
+        /**
+            * Sets current selection.
+            *
+            * Selection events will be dispatched for each selectable that  not present
+            * in new selection.
+            *
+            * @param selection New selection.
+            */
+        setSelection(selection: Selection): void;
         /**
             * Returns a set of selectable elements queried by `selectable` option.
             * If `MutationObserver` is supported, then set is recreated only when `root`
@@ -195,12 +204,43 @@ export interface SelectionEvent extends CustomEvent {
     * being added or removed, i.e, when selection size changes.
     */
 export class Selection {
+        /**
+            * Creates new `Selection`.
+            *
+            * @param elements Elements to be added to the new `Selection`.
+            */
         constructor(elements?: Element[]);
+        /**
+            * Returns the number of selected elements.
+            */
         readonly size: number;
+        /**
+            * Returns a new `Iterator` object that contains selected elements.
+            */
         values(): IterableIterator<Element>;
+        /**
+            * Appends a new element.
+            *
+            * @param element The element to be added.
+            * @returns This `Selection` object.
+            */
         add(element: Element): this;
+        /**
+            * Removes the `element`.
+            *
+            * @param element The element to be removed.
+            * @return The value that `has(element)` would have previously returned.
+            */
         delete(element: Element): boolean;
+        /**
+            * Determines whether an `element` is selected.
+            *
+            * @param element The element to test for selection.
+            */
         has(element: Element): boolean;
+        /**
+            * Removes all elements.
+            */
         clear(): void;
         /**
             * Toggles selection state of the `element`.
@@ -216,12 +256,12 @@ export class Selection {
             */
         toggle(element: Element, force?: boolean): boolean;
         /**
-            * Sets this selection to the intersection with `other` set. This selection
-            * will contain elements present in both collections.
+            * Sets this selection to the intersection with `other` set or selection.
+            * This selection will contain elements present in both collections.
             *
-            * @param other The set being intersected with this selection.
+            * @param other The set or selection being intersected with this selection.
             */
-        intersect(other: Set<Element>): this;
+        intersect(other: Set<Element> | Selection): this;
 }
 
 /**
