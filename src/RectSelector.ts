@@ -34,6 +34,13 @@ export interface RectSelectorOptions {
   boundary(element: Element): RectLike;
 }
 
+interface TopLeft {
+  top: number;
+  left: number;
+}
+
+type TopLeftLike = TopLeft | Rect;
+
 const defaults: Partial<RectSelectorOptions> = {
   lassoClass: 'selekter-lasso',
   threshold: 10,
@@ -50,7 +57,7 @@ export class RectSelector extends Rect implements Selector {
   private area: Area;
   private lasso: HTMLElement;
 
-  private origin: {top: number, left: number};
+  private origin: TopLeft;
   private pendingRenderID: number;
   private preservedSelection: Set<Element>;
 
@@ -67,7 +74,7 @@ export class RectSelector extends Rect implements Selector {
 
   private onMouseDown = (event: MouseEvent) => {
     if (event.button === 0 && event.target === this.area.root) {
-      this.origin = this.offset({ left: event.clientX, top: event.clientY }, this.area.root);
+      this.origin = this.offset({ top: event.clientY, left: event.clientX }, this.relativeTo(this.area.root));
       this.preservedSelection = event.ctrlKey || event.metaKey
         ? new Set(this.area.getSelection().values())
         : null;
@@ -80,7 +87,7 @@ export class RectSelector extends Rect implements Selector {
 
   private onMouseMove = (event: MouseEvent) => {
     event.preventDefault();
-    let mouse = this.offset({ left: event.clientX, top: event.clientY }, this.area.root);
+    let mouse = this.offset({ top: event.clientY, left: event.clientX }, this.relativeTo(this.area.root));
 
     this.top = Math.min(this.origin.top, mouse.top);
     this.left = Math.min(this.origin.left, mouse.left);
@@ -108,15 +115,17 @@ export class RectSelector extends Rect implements Selector {
   }
 
   private update = () => {
+    let offset = this.relativeTo(this.area.root);
     let selection = this.area.getSelection();
+
     this.area.getSelectables().forEach(s =>
       selection.toggle(s,
         (this.preservedSelection && this.preservedSelection.has(s)) ||
-        (this.doesEdgePassThreshold() && this.intersects(this.boundary(s)))));
+        (this.doesEdgePassThreshold() && this.intersects(this.boundary(s, offset)))));
   }
 
-  private boundary(element: Element) {
-    return this.offset(Rect.from(this.options.boundary(element)), this.area.root);
+  private boundary(element: Element, offset: TopLeft) {
+    return this.offset(Rect.from(this.options.boundary(element)), offset);
   }
 
   private requestRender() {
@@ -150,9 +159,17 @@ export class RectSelector extends Rect implements Selector {
     return this.width >= this.options.threshold || this.height >= this.options.threshold;
   }
 
-  private offset<T extends {top: number, left: number}>(x: T, element: HTMLElement) {
-    x.top += element.scrollTop - element.offsetTop + (pageYOffset || document.documentElement.scrollTop),
-    x.left += element.scrollLeft - element.offsetLeft + (pageXOffset || document.documentElement.scrollLeft)
+  private relativeTo(element: HTMLElement): TopLeft {
+    let bounds = element.getBoundingClientRect();
+    return {
+      top: element.scrollTop - bounds.top,
+      left: element.scrollLeft - bounds.left
+    };
+  }
+
+  private offset<T extends TopLeftLike>(x: T, offset: TopLeft): T {
+    x.top += offset.top;
+    x.left += offset.left;
     return x;
   }
 
