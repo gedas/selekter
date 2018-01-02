@@ -1,9 +1,10 @@
 :root {
   --selected-color: #757575;
+  --transition-timing: .218s;
 }
 
 .selekter-selectable {
-  transition: box-shadow .218s ease-in;
+  transition: box-shadow var(--transition-timing) ease-in;
 
   &.selekter-selected {
     box-shadow: 0 0 0 4px var(--selected-color);
@@ -24,7 +25,7 @@
   height: 24px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   transform: translate(-7px,-7px);
-  transition: .218s linear;
+  transition: var(--transition-timing) linear;
   transition-property: background-color, opacity, transform;
 
   .selekter-selectable:hover & {

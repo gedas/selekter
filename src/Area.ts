@@ -70,7 +70,7 @@ export class Area {
    *   ~~~
    *   [
    *     ...DEFAULT_SELECTORS,
-   *     new RectSelector({ threshold: 20 }), // override default
+   *     new RectSelector({ threshold: 20 }) // override default
    *   ]
    *   ~~~
    */
