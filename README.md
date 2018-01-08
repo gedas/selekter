@@ -49,10 +49,10 @@ root.addEventListener(SELECTION_EVENT, (event: SelectionEvent) =>
 If default selection tool options are unfavorable or custom selectors are needed, pass them to `Area` constructor as a third parameter. For example:
 
 ```ts
-import { DEFAULT_SELECTORS, RectSelector } from 'selekter';
+import { createDefaultSelectors, RectSelector } from 'selekter';
 
 new Area(root, { /* options */ }, [
-  ...DEFAULT_SELECTORS,
+  ...createDefaultSelectors(),
   new RectSelector({ threshold: 20 })
 ]);  
 ```
