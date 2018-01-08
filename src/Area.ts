@@ -29,10 +29,10 @@ export interface AreaOptions {
 }
 
 /**
- * An array of default selectors.
+ * A factory function returning an array of default selectors.
  * Intended to be used when specifying selectors for new `Area`.
  */
-export const DEFAULT_SELECTORS: Selector[] = [
+export const createDefaultSelectors = () => [
   new MouseSelector(),
   new RectSelector()
 ];
@@ -63,18 +63,18 @@ export class Area {
 
    * @param root The root element.
    * @param options The area options.
-   * @param selectors Selectors to be registered for this area. Subsequent
+   * @param selectors Selectors to be registered for this area. SubsequentG
    *   selectors will override preceding selectors of the same type and won't
    *   be added more than once. Use this parameter to change the configuration
    *   of default selectors or add new ones.
    *   ~~~
    *   [
-   *     ...DEFAULT_SELECTORS,
+   *     ...createDefaultSelectors(),
    *     new RectSelector({ threshold: 20 }) // override default
    *   ]
    *   ~~~
    */
-  constructor(public root: HTMLElement, public options?: Partial<AreaOptions>, selectors = DEFAULT_SELECTORS) {
+  constructor(public root: HTMLElement, public options?: Partial<AreaOptions>, selectors = createDefaultSelectors()) {
     this.options = { ...defaults, ...options };
     this.selectorDestroyers = this.lastUniqueByConstructor(selectors).map(s => s.connect(this));
 

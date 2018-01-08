@@ -23,10 +23,10 @@ export interface AreaOptions {
         selectedClass: string;
 }
 /**
-    * An array of default selectors.
+    * A factory function returning an array of default selectors.
     * Intended to be used when specifying selectors for new `Area`.
     */
-export const DEFAULT_SELECTORS: Selector[];
+export const createDefaultSelectors: () => (MouseSelector | RectSelector)[];
 /**
     * Represents an area containing selectable elements.
     */
@@ -38,32 +38,32 @@ export class Area {
     
             * @param root The root element.
             * @param options The area options.
-            * @param selectors Selectors to be registered for this area. Subsequent
+            * @param selectors Selectors to be registered for this area. SubsequentG
             *   selectors will override preceding selectors of the same type and won't
             *   be added more than once. Use this parameter to change the configuration
             *   of default selectors or add new ones.
             *   ~~~
             *   [
-            *     ...DEFAULT_SELECTORS,
-            *     new RectSelector({ threshold: 20 }), // override default
+            *     ...createDefaultSelectors(),
+            *     new RectSelector({ threshold: 20 }) // override default
             *   ]
             *   ~~~
             */
-        constructor(root: HTMLElement, options?: Partial<AreaOptions>, selectors?: Selector[]);
+        constructor(root: HTMLElement, options?: Partial<AreaOptions>, selectors?: (MouseSelector | RectSelector)[]);
         /**
             * Returns the current selection.
             *
-            * Modifying this selection will result in selection events being dispatched.
-            * If `MutationObserver` is supported, then selection is updated only when
-            * `root` subtree changes. The update includes removing from selection
-            * elements that are no longer in `root` subtree.
+            * Modifying this selection will result in selection change events being
+            * dispatched. If `MutationObserver` is supported, then selection is updated
+            * only when `root` subtree changes. The update includes removing from
+            * selection elements that are no longer in `root` subtree.
             */
         getSelection(): Selection;
         /**
             * Sets current selection.
             *
-            * Selection events will be dispatched for each selectable that  not present
-            * in new selection.
+            * Selection change events will be dispatched for each selectable that is not present
+            * in the new selection.
             *
             * @param selection New selection.
             */
@@ -186,11 +186,11 @@ export class RectSelector extends Rect implements Selector {
 }
 
 /**
-    * The type of selection event.
+    * The type of selection change event.
     */
 export const SELECTION_EVENT = "selection";
 /**
-    * Represents a selection event published when element has been selected
+    * Represents a selection change event published when element has been selected
     * or deselected.
     */
 export interface SelectionEvent extends CustomEvent {
