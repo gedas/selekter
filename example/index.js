@@ -12,9 +12,9 @@
     cards.appendChild(createCard());
   }
 
-  var root = document.querySelector('.area');
-  root.appendChild(cards);
+  var element = document.body; //document.querySelector('.area');
+  element.appendChild(cards);
   
-  new selekter.Area(root);
+  new selekter.Area({ element });
 
 })();

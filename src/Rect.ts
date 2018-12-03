@@ -3,7 +3,12 @@
  * For example, other `Rect` object or
  * [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect).
  */
-export type RectLike = {left: number, top: number, width: number, height: number};
+export type RectLike = {
+  left: number,
+  top: number,
+  width: number,
+  height: number
+};
 
 /**
  * Represents a mutable rectangular boundary.
@@ -21,25 +26,22 @@ export class Rect {
   constructor(public left = 0, public top = 0, public width = 0, public height = 0) { }
 
   /**
-   * Creates a rectangle from existing rect-like object.
-   * 
-   * @param r Other rect-like object to create rectangle from.
-   * @example `Rect.from(element.getBoundingClientRect())`
-   */
-  static from(r: RectLike): Rect {
-    return new Rect(r.left, r.top, r.width, r.height);
-  }
-
-  /**
    * Determines whether this rectangle intersects other rect-like object.
    * 
    * @param r The specified rect-like object.
    */
-  intersects(r: RectLike) {
-    return this.left <= r.left + r.width
-      && r.left <= this.left + this.width
-      && this.top <= r.top + r.height
-      && r.top <= this.top + this.height;
+  intersects(r: RectLike, left = 0, top = 0) {
+    return this.left <= r.left + left + r.width
+      && r.left + left <= this.left + this.width
+      && this.top <= r.top + top + r.height
+      && r.top + top <= this.top + this.height;
+  }
+
+  setRect(left: number, top: number, width: number, height: number) {
+    this.left = left;
+    this.top = top;
+    this.width = width;
+    this.height = height;
   }
 
 }

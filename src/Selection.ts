@@ -25,7 +25,7 @@ export class Selection {
    * 
    * @param elements Elements to be added to the new `Selection`.
    */
-  constructor(elements?: Element[]) {
+  constructor(elements?: Iterable<Element>) {
     this.elements = new Set<Element>(elements);
   }
 
@@ -53,7 +53,7 @@ export class Selection {
     let had = this.elements.has(element);
     this.elements.add(element);
     if (!had) {
-      this.notify(element, true);
+      this._notify(element, true);
     }
     return this;
   }
@@ -65,7 +65,7 @@ export class Selection {
    * @return The value that `has(element)` would have previously returned.
    */
   delete(element: Element) {
-    return this.elements.delete(element) && !this.notify(element, false);
+    return this.elements.delete(element) && !+this._notify(element, false);
   }
 
   /**
@@ -119,7 +119,7 @@ export class Selection {
     return this;
   }
 
-  private notify(element: Element, selected: boolean) {
+  private _notify(element: Element, selected: boolean) {
     element.dispatchEvent(new CustomEvent(SELECTION_EVENT, {
       bubbles: true,
       detail: { selected }
